@@ -1,0 +1,3064 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A - Periodic Patrol Automata (A)</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Language" content="ja">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="google-site-verification" content="nXGC_JxO0yoP1qBzMnYD_xgufO6leSLw1kyNo2HZltM" />
+
+	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RC512FD18N"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('set', 'user_properties', {
+			
+				'login_status': 'logged_in',
+			
+		});
+		gtag('config', 'G-RC512FD18N');
+	</script>
+
+	
+	<meta name="description" content="プログラミング初級者から上級者まで楽しめる、競技プログラミングコンテストサイト「AtCoder」。オンラインで毎週開催プログラミングコンテストを開催しています。競技プログラミングを用いて、客観的に自分のスキルを計ることのできるサービスです。">
+	<meta name="author" content="AtCoder Inc.">
+
+	<meta property="og:site_name" content="AtCoder">
+	
+	<meta property="og:title" content="A - Periodic Patrol Automata (A)" />
+	<meta property="og:description" content="プログラミング初級者から上級者まで楽しめる、競技プログラミングコンテストサイト「AtCoder」。オンラインで毎週開催プログラミングコンテストを開催しています。競技プログラミングを用いて、客観的に自分のスキルを計ることのできるサービスです。" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://atcoder.jp/contests/masters2026-qual/tasks/masters2026_qual_a" />
+	<meta property="og:image" content="https://img.atcoder.jp/assets/atcoder.png" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@atcoder" />
+	
+	<meta property="twitter:title" content="A - Periodic Patrol Automata (A)" />
+
+	<link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="//img.atcoder.jp/public/aef7fce/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="//img.atcoder.jp/public/aef7fce/css/base.css">
+	<link rel="shortcut icon" type="image/png" href="//img.atcoder.jp/assets/favicon.png">
+	<link rel="apple-touch-icon" href="//img.atcoder.jp/assets/atcoder.png">
+	<script src="//img.atcoder.jp/public/aef7fce/js/lib/jquery-1.9.1.min.js"></script>
+	<script src="//img.atcoder.jp/public/aef7fce/js/lib/bootstrap.min.js"></script>
+	<script src="//img.atcoder.jp/public/aef7fce/js/cdn/js.cookie.min.js"></script>
+	<script src="//img.atcoder.jp/public/aef7fce/js/cdn/moment.min.js"></script>
+	<script src="//img.atcoder.jp/public/aef7fce/js/cdn/moment_js-ja.js"></script>
+	<script>
+		var LANG = "ja";
+		var userScreenName = "tokoharu";
+		var csrfToken = "Rp47s2LKjFGJ+e1kEuKktYKsZeIU7010+7BlZ+2VlCs="
+	</script>
+	<script src="//img.atcoder.jp/public/aef7fce/js/utils.js"></script>
+	
+	
+		<script src="//img.atcoder.jp/public/aef7fce/js/contest.js"></script>
+		<link href="//img.atcoder.jp/public/aef7fce/css/contest.css" rel="stylesheet" />
+		<script>
+			var contestScreenName = "masters2026-qual";
+			var remainingText = "残り時間";
+			var countDownText = "開始まであと";
+			var startTime = moment("2026-03-01T13:00:00+09:00");
+			var endTime = moment("2026-03-01T19:00:00+09:00");
+		</script>
+		<style>.marquee {
+  overflow: hidden;
+}
+
+.marquee__row {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee__inner {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 16s linear infinite;
+  font-size: 2rem;
+  font-weight: 900;
+  color: red;
+  line-height: 1.4;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* スマホ向け */
+@media (max-width: 600px) {
+  .marquee__inner {
+    font-size: 1.6rem;
+    animation-duration: 22s;
+  }
+}
+
+/* 段ごとに少しずつズラす（任意） */
+.marquee__row:nth-child(2) .marquee__inner {
+  animation-duration: 18s;
+}
+
+.marquee__row:nth-child(3) .marquee__inner {
+  animation-duration: 20s;
+}
+</style>
+	
+	
+		<link href="//img.atcoder.jp/public/aef7fce/css/cdn/select2.min.css" rel="stylesheet" />
+		<link href="//img.atcoder.jp/public/aef7fce/css/cdn/select2-bootstrap.min.css" rel="stylesheet" />
+		<script src="//img.atcoder.jp/public/aef7fce/js/lib/select2.min.js"></script>
+	
+	
+		<script src="//img.atcoder.jp/public/aef7fce/js/ace/ace.js"></script>
+		<script src="//img.atcoder.jp/public/aef7fce/js/ace/ext-language_tools.js"></script>
+	
+	
+		<script src="//img.atcoder.jp/public/aef7fce/js/cdn/run_prettify.js"></script>
+	
+	
+		<link rel="stylesheet" href="//img.atcoder.jp/public/aef7fce/css/cdn/katex.min.css">
+		<script defer src="//img.atcoder.jp/public/aef7fce/js/cdn/katex.min.js"></script>
+		<script defer src="//img.atcoder.jp/public/aef7fce/js/cdn/auto-render.min.js"></script>
+		<script>$(function(){$('var').each(function(){var html=$(this).html().replace(/<sub>/g,'_{').replace(/<\/sub>/g,'}');$(this).html('\\('+html+'\\)');});});</script>
+		<script>
+			var katexOptions = {
+				delimiters: [
+					{left: "$$", right: "$$", display: true},
+					
+					{left: "\\(", right: "\\)", display: false},
+					{left: "\\[", right: "\\]", display: true}
+				],
+      	ignoredTags: ["script", "noscript", "style", "textarea", "code", "option"],
+				ignoredClasses: ["prettyprint", "source-code-for-copy"],
+				throwOnError: false
+			};
+			document.addEventListener("DOMContentLoaded", function() { renderMathInElement(document.body, katexOptions);});
+		</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<script src="//img.atcoder.jp/public/aef7fce/js/base.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript">
+	var __pParams = __pParams || [];
+	__pParams.push({client_id: '468', c_1: 'atcodercontest', c_2: 'ClientSite'});
+</script>
+<script type="text/javascript" src="https://cdn.d2-apps.net/js/tr.js" async></script>
+
+
+<div id="modal-contest-start" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">コンテスト開始</h4>
+			</div>
+			<div class="modal-body">
+				<p>第三回マスターズ選手権-予選-が開始されました。</p>
+			</div>
+			<div class="modal-footer">
+				
+					<a class="btn btn-primary" href='/contests/masters2026-qual/tasks'>問題一覧ページへ移動</a>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modal-contest-end" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">コンテスト終了</h4>
+			</div>
+			<div class="modal-body">
+				<p>第三回マスターズ選手権-予選-は終了しました。</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="main-div" class="float-container">
+
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+					<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/home"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-collapse">
+				<ul class="nav navbar-nav">
+				
+					<li><a class="contest-title" href="/contests/masters2026-qual">第三回マスターズ選手権-予選-</a></li>
+				
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							<img src='//img.atcoder.jp/assets/top/img/flag-lang/ja.png'> 日本語 <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/contests/masters2026-qual/tasks/masters2026_qual_a?lang=ja"><img src='//img.atcoder.jp/assets/top/img/flag-lang/ja.png'> 日本語</a></li>
+							<li><a href="/contests/masters2026-qual/tasks/masters2026_qual_a?lang=en"><img src='//img.atcoder.jp/assets/top/img/flag-lang/en.png'> English</a></li>
+						</ul>
+					</li>
+					
+					
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+								<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> tokoharu (Contestant) <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="/users/tokoharu"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> マイプロフィール</a></li>
+								<li class="divider"></li>
+								<li><a href="/settings"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 基本設定</a></li>
+								<li><a href="/settings/icon"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> アイコン設定</a></li>
+								<li><a href="/settings/password"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> パスワードの変更</a></li>
+								<li><a href="/settings/fav"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> お気に入り管理</a></li>
+								
+								
+								
+								<li class="divider"></li>
+								<li><a href="javascript:void(form_logout.submit())"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> ログアウト</a></li>
+							</ul>
+						</li>
+					
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<form method="POST" name="form_logout" action="/logout?continue=https%3A%2F%2Fatcoder.jp%2Fcontests%2Fmasters2026-qual%2Ftasks%2Fmasters2026_qual_a">
+		<input type="hidden" name="csrf_token" value="Rp47s2LKjFGJ&#43;e1kEuKktYKsZeIU7010&#43;7BlZ&#43;2VlCs=" />
+	</form>
+	<div id="main-container" class="container"
+		 	style="padding-top:50px;">
+		
+
+
+<div class="row">
+	<div id="contest-nav-tabs" class="col-sm-12 mb-2 cnvtb-fixed">
+	<div>
+		<small class="contest-duration">
+			
+				コンテスト時間:
+				<a href='http://www.timeanddate.com/worldclock/fixedtime.html?iso=20260301T1300&p1=248' target='blank'><time class='fixtime fixtime-full'>2026-03-01 13:00:00+0900</time></a> ~ <a href='http://www.timeanddate.com/worldclock/fixedtime.html?iso=20260301T1900&p1=248' target='blank'><time class='fixtime fixtime-full'>2026-03-01 19:00:00+0900</time></a> 
+				(360分)
+			
+		</small>
+		<small class="back-to-home pull-right"><a href="/home">AtCoderホームへ戻る</a></small>
+	</div>
+	<ul class="nav nav-tabs">
+		<li><a href="/contests/masters2026-qual"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> トップ</a></li>
+		
+			<li class="active"><a href="/contests/masters2026-qual/tasks"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> 問題</a></li>
+		
+
+		
+			<li><a href="/contests/masters2026-qual/clarifications"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> 質問 <span id="clar-badge" class="badge" ></span></a></li>
+		
+
+		
+			<li><a href="/contests/masters2026-qual/submit?taskScreenName=masters2026_qual_a"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> 提出</a></li>
+		
+
+		
+			<li>
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 提出結果<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					
+					
+						<li><a href="/contests/masters2026-qual/submissions/me"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 自分の提出</a></li>
+						
+							<li><a href="/contests/masters2026-qual/submissions/team"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span> チームの提出</a></li>
+						
+						
+					
+				</ul>
+			</li>
+		
+
+		
+			
+				
+					<li><a href="/contests/masters2026-qual/standings/team"><span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span> チーム戦順位表</a></li>
+				
+			
+		
+
+		
+			<li><a href="/contests/masters2026-qual/custom_test"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> コードテスト</a></li>
+		
+
+		
+		
+
+		<li class="pull-right"><a id="fix-cnvtb" href="javascript:void(0)"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></a></li>
+	</ul>
+</div>
+	<div class="col-sm-12">
+		<span class="h2">
+			A - Periodic Patrol Automata (A)
+			
+		</span>
+		<span id="task-lang-btn" class="pull-right"><span data-lang="ja"><img src='//img.atcoder.jp/assets/top/img/flag-lang/ja.png'></span> / <span data-lang="en"><img src='//img.atcoder.jp/assets/top/img/flag-lang/en.png'></span></span>
+		<script>
+			$(function() {
+				var ts = $('#task-statement span.lang');
+				if (ts.children('span').size() <= 1) {
+					$('#task-lang-btn').hide();
+					ts.children('span').show();
+					return;
+				}
+
+				var REMEMBER_LB = 5;
+				var LS_KEY = 'task_lang';
+				var taskLang = getLS(LS_KEY) || '';
+				function isTaskLangSet(taskLang) { return taskLang === 'ja' || taskLang === 'en';}
+				if (isTaskLangSet(taskLang)) {
+					const params = new URLSearchParams(window.location.search);
+					if (params.get('lang')) {
+						setLS(LS_KEY, REMEMBER_LB);
+						taskLang = LANG;
+					}
+				} else {
+					taskLang = LANG;
+				}
+				ts.children('span.lang-' + taskLang).show();
+
+				$('#task-lang-btn span').click(function() {
+					var l = $(this).data('lang');
+					ts.children('span').hide();
+					ts.children('span.lang-' + l).show();
+
+					taskLang = getLS(LS_KEY) || '';
+					let changeTimes = 0;
+					if (isTaskLangSet(taskLang)) {
+						changeTimes = REMEMBER_LB;
+					} else {
+						changeTimes = parseInt(taskLang, 10);
+						if (isNaN(changeTimes)) changeTimes = 0;
+						changeTimes++;
+					}
+					if (changeTimes < REMEMBER_LB) setLS(LS_KEY, changeTimes);
+					else setLS(LS_KEY, l);
+				});
+			});
+		</script>
+		<hr/>
+		<p>
+			実行時間制限: 2 sec / メモリ制限: 1024 MiB
+			
+			
+		</p>
+
+		<div id="task-statement">
+			
+
+
+	
+	
+
+			<span class="lang">
+<span class="lang-ja">
+
+<div class="part">
+<section>
+<h3>ストーリー</h3><p>AtCoder社はオフィスの警備を行うロボットを開発中である。
+ロボットは前方に壁があるかどうかに応じて状態と行動を変化させる <a href="https://ja.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E3%82%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%88%E3%83%B3">有限オートマトン</a> によって制御される。
+オートマトンの状態数、導入するロボットの台数、新たに設置する壁の枚数に応じて必要なコストは変化する。
+オフィス全体が定期的に警備されるような、できるだけコストの低い方法を求めてほしい。</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>問題文</h3><p><var>N\times N</var> マスの盤面がある。
+一番左上のマスの座標を <var>(0,0)</var> とし、そこから下方向に <var>i</var> マス、右方向に <var>j</var> マス進んだ先のマスの座標を <var>(i,j)</var> とする。
+<var>N\times N</var> マスの外周は壁で囲まれており、隣接するマス間にも壁が存在する場合がある。</p>
+<p>最大で <var>N^2</var> 台のロボットを導入できる。
+各ロボットにはそれぞれ最大で <var>4N^2</var> 通りの内部状態を設定できる。
+ロボットは、前方が壁かどうか（すなわち、現在のマスから現在の向きに1マス進んだ先との間に壁があるかどうか）と現在の内部状態に応じて、直進・右折・左折の行動と次の内部状態を決定するオートマトンによって制御される。</p>
+<p>直進(<code>F</code>)は現在の向きに1マス移動し、向きは変化しない。
+右折(<code>R</code>)および左折(<code>L</code>)は他のマスへの移動を伴わない、その場での方向転換を指す。</p>
+<p>1ステップの動作は次の順に行われる。
+まず現在の（位置、向き、内部状態）から前方の壁の有無を判定する。
+次に行動と次状態を決定する。
+その後行動を実行し、最後に内部状態を次状態に更新する。</p>
+<p><var>k</var> 番目のロボットを制御するオートマトンの内部状態数を <var>m_k</var> とする。<var>m_k</var> は設計者が任意に定めてよい。
+このとき、各状態 <var>s=0,1,\cdots,m_k-1</var> について、以下を指定する。</p>
+<ul>
+<li><var>a_{k,s,0}</var>: 前方が壁でない場合に、右折(<code>R</code>)、左折(<code>L</code>)、直進(<code>F</code>)のいずれを行うか。</li>
+<li><var>b_{k,s,0}</var>: 前方が壁でない場合の次の状態番号。</li>
+<li><var>a_{k,s,1}</var>: 前方が壁の場合に、右折(<code>R</code>)、左折(<code>L</code>)のいずれを行うか。直進(<code>F</code>)は選べない。</li>
+<li><var>b_{k,s,1}</var>: 前方が壁の場合の次の状態番号。</li>
+</ul>
+<h4>例</h4>
+<blockquote>
+<p>内部状態数が2の、以下のようなオートマトンを考える。</p>
+<p><table class="table table-bordered">
+    <tr>
+        <th><var>s</var></th>
+        <th><var>a_{k,s,0}</var></th>
+        <th><var>b_{k,s,0}</var></th>
+        <th><var>a_{k,s,1}</var></th>
+        <th><var>b_{k,s,1}</var></th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>F</td>
+        <td>0</td>
+        <td>R</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>R</td>
+        <td>0</td>
+        <td>R</td>
+        <td>0</td>
+    </tr>
+</table></p>
+<p><img alt="例" src="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW_ja.svg" /></p>
+<p>このオートマトンは以下のように動作する。</p>
+<ul>
+<li>内部状態が0のとき、前方に壁がない限り直進し、前方に壁があると右折して内部状態1に遷移する。</li>
+<li>内部状態が1のとき、前方に壁があるかどうかに関わらず右折し、内部状態0に遷移する。</li>
+</ul>
+<p>すなわち、前方に壁がない限り直進し、壁の直前でUターンする動作を繰り返す。</p>
+</blockquote>
+<p>次に、各ロボット <var>k</var> に対し、初期配置における位置 <var>(i_k,j_k)</var> と向き <var>d_k</var>（上: <code>U</code>、下: <code>D</code>、左: <code>L</code>、右: <code>R</code>）を決定する。
+内部状態の初期値は <var>0</var> である。
+ロボット同士は互いに干渉せず、同じマスに複数台存在できる。</p>
+<p>最後に、新たな壁を設置する。
+壁は任意の隣接2マス間に設置できる。
+すでに壁のある位置を指定してもよいが、単にコストが増えるだけで何も起こらない。
+新たに導入する壁によって盤面が非連結となっても構わない。</p>
+<p>各ロボットの（位置、向き、内部状態）の組は有限であり、同じ組に対する次時刻の（位置、向き、内部状態）の組は一意に定まる。
+したがって、一定時間経過後は必ず周期的な行動に入る。
+この周期的な行動中にロボットが訪れるマスを、そのロボットの警備対象マスと定義する。
+周期的な行動に入る前にのみ訪れるマスは警備対象マスに含めない。</p>
+<p>導入するロボットの台数を <var>K</var>、全ロボットの内部状態数の総和を <var>M=\sum_k m_k</var>、
+出力において新たに設置すると指定した壁の本数（出力の <code>1</code> の個数）を <var>W</var> とする。
+入力で与えられる係数 <var>A_K</var>、<var>A_M</var>、<var>A_W</var> に対し、導入コスト <var>V</var> を以下のように定義する。</p>
+<p>\[
+V = A_K \times (K-1) + A_M \times M + A_W \times W
+\]</p>
+<p>全てのマスがいずれかのロボットの警備対象マスとなるような、できるだけ導入コストの低い方法を求めよ。
+警備対象マスとならないマスが存在する場合、<span class='label label-warning' data-toggle='tooltip' data-placement='top' title="不正解">WA</span> と判定される。</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>得点</h3><p>導入コストが <var>V</var> のとき、以下の得点が得られる。</p>
+<p>\[
+1+\mathrm{round}\left(10^6\times \max\left(0,\log_2 \frac{A_K (N^2-1) + A_M N^2}{V}\right)\right)
+\]</p>
+<p>係数 <var>A_K</var>、<var>A_M</var>、<var>A_W</var> の違いにより、問題は A・B・C の 3 問 に分かれている。
+それぞれの問題には 150 個のテストケース があり、各テストケースの得点の合計がその問題に対する提出の得点となる。
+一つ以上のテストケースで不正な出力や制限時間超過をした場合、提出全体の判定が<span class='label label-warning' data-toggle='tooltip' data-placement='top' title="不正解">WA</span>や<span class='label label-warning' data-toggle='tooltip' data-placement='top' title="実行時間制限超過">TLE</span>となる。
+各問題に対して獲得した最高得点の総和で最終順位が決定され、コンテスト終了後のシステムテストは行われない。 同じ得点を複数のチームが得た場合、提出時刻に関わらず同じ順位となる。</p>
+</section>
+</div>
+
+<hr />
+<div class="io-style">
+<div class="part">
+<section>
+<h3>入力</h3><p>入力は以下の形式で標準入力から与えられる。</p>
+<pre><var>N</var> <var>A_K</var> <var>A_M</var> <var>A_W</var>
+<var>v_{0,0} \cdots v_{0,N-2}</var>
+<var>\vdots</var>
+<var>v_{N-1,0} \cdots v_{N-1,N-2}</var>
+<var>h_{0,0} \cdots h_{0,N-1}</var>
+<var>\vdots</var>
+<var>h_{N-2,0} \cdots h_{N-2,N-1}</var>
+</pre>
+<ul>
+<li>盤面サイズ <var>N</var> は全てのテストケースにおいて <var>N=20</var> に固定されている。</li>
+<li>導入コストの係数 <var>A_K, A_M, A_W</var> はそれぞれ <var>0</var> 以上 <var>1000</var> 以下の整数である。</li>
+<li><var>v_{i,0} \cdots v_{i,N-2}</var> は長さ <var>N-1</var> の <code>0</code> と <code>1</code> からなる文字列であり、<var>j</var> 文字目の文字 <var>v_{i,j}</var> は、マス <var>(i, j)</var> とマス <var>(i, j+1)</var> の間に壁がある（<code>1</code>）かない（<code>0</code>）かを表す。</li>
+<li><var>h_{i,0} \cdots h_{i,N-1}</var> は長さ <var>N</var> の <code>0</code> と <code>1</code> からなる文字列であり、<var>j</var> 文字目の文字 <var>h_{i,j}</var> は、マス <var>(i, j)</var> とマス <var>(i+1, j)</var> の間に壁がある（<code>1</code>）かない（<code>0</code>）かを表す。</li>
+<li>初期状態において、全てのマスは互いに到達可能であることが保証されている。</li>
+</ul>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>出力</h3><p>以下の形式で標準出力に出力せよ。</p>
+<pre><var>K</var>
+<var>m_0</var> <var>i_0</var> <var>j_0</var> <var>d_0</var>
+<var>a_{0,0,0}</var> <var>b_{0,0,0}</var> <var>a_{0,0,1}</var> <var>b_{0,0,1}</var>
+<var>\vdots</var>
+<var>a_{0,m_0-1,0}</var> <var>b_{0,m_0-1,0}</var> <var>a_{0,m_0-1,1}</var> <var>b_{0,m_0-1,1}</var>
+<var>\vdots</var>
+<var>m_{K-1}</var> <var>i_{K-1}</var> <var>j_{K-1}</var> <var>d_{K-1}</var>
+<var>a_{K-1,0,0}</var> <var>b_{K-1,0,0}</var> <var>a_{K-1,0,1}</var> <var>b_{K-1,0,1}</var>
+<var>\vdots</var>
+<var>a_{K-1,m_{K-1}-1,0}</var> <var>b_{K-1,m_{K-1}-1,0}</var> <var>a_{K-1,m_{K-1}-1,1}</var> <var>b_{K-1,m_{K-1}-1,1}</var>
+<var>v_{0,0}' \cdots v_{0,N-2}'</var>
+<var>\vdots</var>
+<var>v_{N-1,0}' \cdots v_{N-1,N-2}'</var>
+<var>h_{0,0}' \cdots h_{0,N-1}'</var>
+<var>\vdots</var>
+<var>h_{N-2,0}' \cdots h_{N-2,N-1}'</var>
+</pre>
+<ul>
+<li><var>K</var> は開発するロボットの台数であり、<var>1\leq K\leq N^2</var> を満たさなければならない。</li>
+<li><var>m_k</var> は <var>k</var> 番目のロボットの内部状態数であり、<var>1\leq m_k\leq 4N^2</var> を満たさなければならない。</li>
+<li><var>(i_k,j_k)</var> は <var>k</var> 番目のロボットの初期位置であり、<var>0\leq i_k,j_k\leq N-1</var> を満たさなければならない。</li>
+<li><var>d_k</var> は <var>k</var> 番目のロボットの初期方向であり、上: <code>U</code>、下: <code>D</code>、左: <code>L</code>、右: <code>R</code> のいずれかの文字である。</li>
+<li>各ロボット <var>k</var> について、内部状態 <var>s=0,1,\dots,m_k-1</var> の順にちょうど <var>m_k</var> 行を出力しなければならない。<ul>
+<li><var>a_{k,s,0}, a_{k,s,1}</var> は、ロボット <var>k</var> が内部状態 <var>s</var> のときの行動を表す。前方が壁でない場合と壁である場合それぞれについて、右折: <code>R</code>、左折: <code>L</code>、直進: <code>F</code> のいずれかを指定する。ただし、<var>a_{k,s,1}</var> は <code>F</code> であってはならない。</li>
+<li><var>b_{k,s,0}, b_{k,s,1}</var> は、ロボット <var>k</var> が内部状態 <var>s</var> のときの遷移先の内部状態番号を表す。前方が壁でない場合と壁である場合それぞれについて、<var>0\leq b_{k,s,0}, b_{k,s,1}\leq m_k-1</var> を満たさなければならない。</li>
+</ul>
+</li>
+<li><var>v_{i,0}' \cdots v_{i,N-2}'</var> は長さ <var>N-1</var> の <code>0</code> と <code>1</code> からなる文字列であり、<var>j</var> 文字目の文字 <var>v_{i,j}'</var> は、マス <var>(i, j)</var> とマス <var>(i, j+1)</var> の間に新たに壁を設置する（<code>1</code>）かしない（<code>0</code>）かを表す。</li>
+<li><var>h_{i,0}' \cdots h_{i,N-1}'</var> は長さ <var>N</var> の <code>0</code> と <code>1</code> からなる文字列であり、<var>j</var> 文字目の文字 <var>h_{i,j}'</var> は、マス <var>(i, j)</var> とマス <var>(i+1, j)</var> の間に新たに壁を設置する（<code>1</code>）かしない（<code>0</code>）かを表す。</li>
+<li>壁の設置によって盤面が非連結になっても構わない。</li>
+</ul>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>サンプルプログラム</h3><details>
+Python での解答例を示す。
+このプログラムでは、その場で右回転し続けるロボットを、全てのマスに1台ずつ配置している。
+
+<pre class="prettyprint linenums">
+import sys
+input = sys.stdin.readline
+
+N, AK, AM, AW = map(int, input().split())
+wall_v = [input().strip() for _ in range(N)]
+wall_h = [input().strip() for _ in range(N - 1)]
+
+K = N * N
+print(K)
+
+for i in range(N):
+    for j in range(N):
+        m = 1
+        d = 'U'
+        print(m, i, j, d)
+        print('R 0 R 0')
+
+for _ in range(N):
+    print('0' * (N - 1))
+for _ in range(N - 1):
+    print('0' * N)
+</pre>
+
+</details>
+
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>入力生成方法</h3><h4>コスト係数の生成</h4>
+<p>各問題 A,B,C ごとに、以下の表に記載の範囲(閉区間)から一様ランダムに生成される。</p>
+<table class="table table-bordered" style="width: auto;">
+<thead>
+<tr>
+<th>問題</th>
+<th><var>A_K</var></th>
+<th><var>A_M</var></th>
+<th><var>A_W</var></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><var>[0,0]</var></td>
+<td><var>[1,1]</var></td>
+<td><var>[1000,1000]</var></td>
+</tr>
+<tr>
+<td>B</td>
+<td><var>[1000,1000]</var></td>
+<td><var>[1,10]</var></td>
+<td><var>[1,10]</var></td>
+</tr>
+<tr>
+<td>C</td>
+<td><var>[1000,1000]</var></td>
+<td><var>[1,1]</var></td>
+<td><var>[1000,1000]</var></td>
+</tr>
+</tbody>
+</table>
+
+<h4>壁の生成</h4>
+<p><var>\mathrm{rand}(L, U)</var> を、<var>L</var> 以上 <var>U</var> 以下の整数を一様ランダムに生成する関数とする。</p>
+<p>まず、縦方向の壁生成回数 <var>X=\mathrm{rand}(1,6)</var> と横方向の壁生成回数 <var>Y=\mathrm{rand}(1,6)</var> を生成する。</p>
+<p>壁が一枚も無い状態から開始して、以下のように壁を生成する。</p>
+<p>以下の操作を <var>X</var> 回繰り返す。</p>
+<ol>
+<li>壁を生成する方向を上または下からランダムに決定する。</li>
+<li>壁の長さを <var>L = \mathrm{rand}(5, 15)</var> により生成する。</li>
+<li>始点 <var>(i, j)</var> を <var>i = \mathrm{rand}(0, N-1),\ j = \mathrm{rand}(0, N-2)</var> により選択する。</li>
+<li>上方向の場合は <var>v_{i-L+1, j}, \cdots, v_{i, j}</var> を、下方向の場合は <var>v_{i, j}, \cdots, v_{i+L-1, j}</var> を <code>1</code> に設定する。ただし、添字が盤面の範囲外となる項は無視する。</li>
+</ol>
+<p>以下の操作を <var>Y</var> 回繰り返す。</p>
+<ol>
+<li>壁を生成する方向を左または右からランダムに決定する。</li>
+<li>壁の長さを <var>L = \mathrm{rand}(5, 15)</var> により生成する。</li>
+<li>始点 <var>(i, j)</var> を <var>i = \mathrm{rand}(0, N-2),\ j = \mathrm{rand}(0, N-1)</var> により選択する。</li>
+<li>左方向の場合は <var>h_{i, j-L+1}, \cdots, h_{i, j}</var> を、右方向の場合は <var>h_{i, j}, \cdots, h_{i, j+L-1}</var> を <code>1</code> に設定する。ただし、添字が盤面の範囲外となる項は無視する。</li>
+</ol>
+<p>生成した壁に対し、すべてのマスが到達可能であるかを判定する。到達不能な場合は壁を初期化して <var>X+Y</var> 回の壁生成をやり直す（<var>X,Y</var> は再生成しない）。</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>ツール(入力ジェネレータ・スコア計算)</h3><ul>
+<li><a href="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW.zip">ローカル版</a>: 使用するには<a href="https://www.rust-lang.org/ja">Rust言語</a>のコンパイル環境をご用意下さい。<ul>
+<li><a href="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW_windows.zip">Windows用のコンパイル済みバイナリ</a>: Rust言語の環境構築が面倒な方は代わりにこちらをご利用下さい。</li>
+</ul>
+</li>
+</ul>
+<p>コンテスト期間中に、チーム外とのビジュアライズ結果の共有や解法・考察に関する言及は禁止されています。ご注意下さい。</p>
+</section>
+</div>
+</div>
+
+<hr />
+<div class="part">
+<section>
+<h3>入力例 1</h3><pre style="max-height:200px;overflow-y:scroll">20 0 1 1000
+0010000000000000000
+0010000000000000000
+0010000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000010000
+0001000000000010000
+0001010000000010000
+0001010000000010000
+0001010000000010000
+0001010000000010000
+0000010000000010000
+0000000000000010000
+0000000000000000000
+00000000000000000000
+00000000111111111110
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+</pre>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>出力例 1</h3><pre style="max-height:200px;overflow-y:scroll">400
+1 0 0 U
+R 0 R 0
+1 0 1 U
+R 0 R 0
+1 0 2 U
+R 0 R 0
+1 0 3 U
+R 0 R 0
+1 0 4 U
+R 0 R 0
+1 0 5 U
+R 0 R 0
+1 0 6 U
+R 0 R 0
+1 0 7 U
+R 0 R 0
+1 0 8 U
+R 0 R 0
+1 0 9 U
+R 0 R 0
+1 0 10 U
+R 0 R 0
+1 0 11 U
+R 0 R 0
+1 0 12 U
+R 0 R 0
+1 0 13 U
+R 0 R 0
+1 0 14 U
+R 0 R 0
+1 0 15 U
+R 0 R 0
+1 0 16 U
+R 0 R 0
+1 0 17 U
+R 0 R 0
+1 0 18 U
+R 0 R 0
+1 0 19 U
+R 0 R 0
+1 1 0 U
+R 0 R 0
+1 1 1 U
+R 0 R 0
+1 1 2 U
+R 0 R 0
+1 1 3 U
+R 0 R 0
+1 1 4 U
+R 0 R 0
+1 1 5 U
+R 0 R 0
+1 1 6 U
+R 0 R 0
+1 1 7 U
+R 0 R 0
+1 1 8 U
+R 0 R 0
+1 1 9 U
+R 0 R 0
+1 1 10 U
+R 0 R 0
+1 1 11 U
+R 0 R 0
+1 1 12 U
+R 0 R 0
+1 1 13 U
+R 0 R 0
+1 1 14 U
+R 0 R 0
+1 1 15 U
+R 0 R 0
+1 1 16 U
+R 0 R 0
+1 1 17 U
+R 0 R 0
+1 1 18 U
+R 0 R 0
+1 1 19 U
+R 0 R 0
+1 2 0 U
+R 0 R 0
+1 2 1 U
+R 0 R 0
+1 2 2 U
+R 0 R 0
+1 2 3 U
+R 0 R 0
+1 2 4 U
+R 0 R 0
+1 2 5 U
+R 0 R 0
+1 2 6 U
+R 0 R 0
+1 2 7 U
+R 0 R 0
+1 2 8 U
+R 0 R 0
+1 2 9 U
+R 0 R 0
+1 2 10 U
+R 0 R 0
+1 2 11 U
+R 0 R 0
+1 2 12 U
+R 0 R 0
+1 2 13 U
+R 0 R 0
+1 2 14 U
+R 0 R 0
+1 2 15 U
+R 0 R 0
+1 2 16 U
+R 0 R 0
+1 2 17 U
+R 0 R 0
+1 2 18 U
+R 0 R 0
+1 2 19 U
+R 0 R 0
+1 3 0 U
+R 0 R 0
+1 3 1 U
+R 0 R 0
+1 3 2 U
+R 0 R 0
+1 3 3 U
+R 0 R 0
+1 3 4 U
+R 0 R 0
+1 3 5 U
+R 0 R 0
+1 3 6 U
+R 0 R 0
+1 3 7 U
+R 0 R 0
+1 3 8 U
+R 0 R 0
+1 3 9 U
+R 0 R 0
+1 3 10 U
+R 0 R 0
+1 3 11 U
+R 0 R 0
+1 3 12 U
+R 0 R 0
+1 3 13 U
+R 0 R 0
+1 3 14 U
+R 0 R 0
+1 3 15 U
+R 0 R 0
+1 3 16 U
+R 0 R 0
+1 3 17 U
+R 0 R 0
+1 3 18 U
+R 0 R 0
+1 3 19 U
+R 0 R 0
+1 4 0 U
+R 0 R 0
+1 4 1 U
+R 0 R 0
+1 4 2 U
+R 0 R 0
+1 4 3 U
+R 0 R 0
+1 4 4 U
+R 0 R 0
+1 4 5 U
+R 0 R 0
+1 4 6 U
+R 0 R 0
+1 4 7 U
+R 0 R 0
+1 4 8 U
+R 0 R 0
+1 4 9 U
+R 0 R 0
+1 4 10 U
+R 0 R 0
+1 4 11 U
+R 0 R 0
+1 4 12 U
+R 0 R 0
+1 4 13 U
+R 0 R 0
+1 4 14 U
+R 0 R 0
+1 4 15 U
+R 0 R 0
+1 4 16 U
+R 0 R 0
+1 4 17 U
+R 0 R 0
+1 4 18 U
+R 0 R 0
+1 4 19 U
+R 0 R 0
+1 5 0 U
+R 0 R 0
+1 5 1 U
+R 0 R 0
+1 5 2 U
+R 0 R 0
+1 5 3 U
+R 0 R 0
+1 5 4 U
+R 0 R 0
+1 5 5 U
+R 0 R 0
+1 5 6 U
+R 0 R 0
+1 5 7 U
+R 0 R 0
+1 5 8 U
+R 0 R 0
+1 5 9 U
+R 0 R 0
+1 5 10 U
+R 0 R 0
+1 5 11 U
+R 0 R 0
+1 5 12 U
+R 0 R 0
+1 5 13 U
+R 0 R 0
+1 5 14 U
+R 0 R 0
+1 5 15 U
+R 0 R 0
+1 5 16 U
+R 0 R 0
+1 5 17 U
+R 0 R 0
+1 5 18 U
+R 0 R 0
+1 5 19 U
+R 0 R 0
+1 6 0 U
+R 0 R 0
+1 6 1 U
+R 0 R 0
+1 6 2 U
+R 0 R 0
+1 6 3 U
+R 0 R 0
+1 6 4 U
+R 0 R 0
+1 6 5 U
+R 0 R 0
+1 6 6 U
+R 0 R 0
+1 6 7 U
+R 0 R 0
+1 6 8 U
+R 0 R 0
+1 6 9 U
+R 0 R 0
+1 6 10 U
+R 0 R 0
+1 6 11 U
+R 0 R 0
+1 6 12 U
+R 0 R 0
+1 6 13 U
+R 0 R 0
+1 6 14 U
+R 0 R 0
+1 6 15 U
+R 0 R 0
+1 6 16 U
+R 0 R 0
+1 6 17 U
+R 0 R 0
+1 6 18 U
+R 0 R 0
+1 6 19 U
+R 0 R 0
+1 7 0 U
+R 0 R 0
+1 7 1 U
+R 0 R 0
+1 7 2 U
+R 0 R 0
+1 7 3 U
+R 0 R 0
+1 7 4 U
+R 0 R 0
+1 7 5 U
+R 0 R 0
+1 7 6 U
+R 0 R 0
+1 7 7 U
+R 0 R 0
+1 7 8 U
+R 0 R 0
+1 7 9 U
+R 0 R 0
+1 7 10 U
+R 0 R 0
+1 7 11 U
+R 0 R 0
+1 7 12 U
+R 0 R 0
+1 7 13 U
+R 0 R 0
+1 7 14 U
+R 0 R 0
+1 7 15 U
+R 0 R 0
+1 7 16 U
+R 0 R 0
+1 7 17 U
+R 0 R 0
+1 7 18 U
+R 0 R 0
+1 7 19 U
+R 0 R 0
+1 8 0 U
+R 0 R 0
+1 8 1 U
+R 0 R 0
+1 8 2 U
+R 0 R 0
+1 8 3 U
+R 0 R 0
+1 8 4 U
+R 0 R 0
+1 8 5 U
+R 0 R 0
+1 8 6 U
+R 0 R 0
+1 8 7 U
+R 0 R 0
+1 8 8 U
+R 0 R 0
+1 8 9 U
+R 0 R 0
+1 8 10 U
+R 0 R 0
+1 8 11 U
+R 0 R 0
+1 8 12 U
+R 0 R 0
+1 8 13 U
+R 0 R 0
+1 8 14 U
+R 0 R 0
+1 8 15 U
+R 0 R 0
+1 8 16 U
+R 0 R 0
+1 8 17 U
+R 0 R 0
+1 8 18 U
+R 0 R 0
+1 8 19 U
+R 0 R 0
+1 9 0 U
+R 0 R 0
+1 9 1 U
+R 0 R 0
+1 9 2 U
+R 0 R 0
+1 9 3 U
+R 0 R 0
+1 9 4 U
+R 0 R 0
+1 9 5 U
+R 0 R 0
+1 9 6 U
+R 0 R 0
+1 9 7 U
+R 0 R 0
+1 9 8 U
+R 0 R 0
+1 9 9 U
+R 0 R 0
+1 9 10 U
+R 0 R 0
+1 9 11 U
+R 0 R 0
+1 9 12 U
+R 0 R 0
+1 9 13 U
+R 0 R 0
+1 9 14 U
+R 0 R 0
+1 9 15 U
+R 0 R 0
+1 9 16 U
+R 0 R 0
+1 9 17 U
+R 0 R 0
+1 9 18 U
+R 0 R 0
+1 9 19 U
+R 0 R 0
+1 10 0 U
+R 0 R 0
+1 10 1 U
+R 0 R 0
+1 10 2 U
+R 0 R 0
+1 10 3 U
+R 0 R 0
+1 10 4 U
+R 0 R 0
+1 10 5 U
+R 0 R 0
+1 10 6 U
+R 0 R 0
+1 10 7 U
+R 0 R 0
+1 10 8 U
+R 0 R 0
+1 10 9 U
+R 0 R 0
+1 10 10 U
+R 0 R 0
+1 10 11 U
+R 0 R 0
+1 10 12 U
+R 0 R 0
+1 10 13 U
+R 0 R 0
+1 10 14 U
+R 0 R 0
+1 10 15 U
+R 0 R 0
+1 10 16 U
+R 0 R 0
+1 10 17 U
+R 0 R 0
+1 10 18 U
+R 0 R 0
+1 10 19 U
+R 0 R 0
+1 11 0 U
+R 0 R 0
+1 11 1 U
+R 0 R 0
+1 11 2 U
+R 0 R 0
+1 11 3 U
+R 0 R 0
+1 11 4 U
+R 0 R 0
+1 11 5 U
+R 0 R 0
+1 11 6 U
+R 0 R 0
+1 11 7 U
+R 0 R 0
+1 11 8 U
+R 0 R 0
+1 11 9 U
+R 0 R 0
+1 11 10 U
+R 0 R 0
+1 11 11 U
+R 0 R 0
+1 11 12 U
+R 0 R 0
+1 11 13 U
+R 0 R 0
+1 11 14 U
+R 0 R 0
+1 11 15 U
+R 0 R 0
+1 11 16 U
+R 0 R 0
+1 11 17 U
+R 0 R 0
+1 11 18 U
+R 0 R 0
+1 11 19 U
+R 0 R 0
+1 12 0 U
+R 0 R 0
+1 12 1 U
+R 0 R 0
+1 12 2 U
+R 0 R 0
+1 12 3 U
+R 0 R 0
+1 12 4 U
+R 0 R 0
+1 12 5 U
+R 0 R 0
+1 12 6 U
+R 0 R 0
+1 12 7 U
+R 0 R 0
+1 12 8 U
+R 0 R 0
+1 12 9 U
+R 0 R 0
+1 12 10 U
+R 0 R 0
+1 12 11 U
+R 0 R 0
+1 12 12 U
+R 0 R 0
+1 12 13 U
+R 0 R 0
+1 12 14 U
+R 0 R 0
+1 12 15 U
+R 0 R 0
+1 12 16 U
+R 0 R 0
+1 12 17 U
+R 0 R 0
+1 12 18 U
+R 0 R 0
+1 12 19 U
+R 0 R 0
+1 13 0 U
+R 0 R 0
+1 13 1 U
+R 0 R 0
+1 13 2 U
+R 0 R 0
+1 13 3 U
+R 0 R 0
+1 13 4 U
+R 0 R 0
+1 13 5 U
+R 0 R 0
+1 13 6 U
+R 0 R 0
+1 13 7 U
+R 0 R 0
+1 13 8 U
+R 0 R 0
+1 13 9 U
+R 0 R 0
+1 13 10 U
+R 0 R 0
+1 13 11 U
+R 0 R 0
+1 13 12 U
+R 0 R 0
+1 13 13 U
+R 0 R 0
+1 13 14 U
+R 0 R 0
+1 13 15 U
+R 0 R 0
+1 13 16 U
+R 0 R 0
+1 13 17 U
+R 0 R 0
+1 13 18 U
+R 0 R 0
+1 13 19 U
+R 0 R 0
+1 14 0 U
+R 0 R 0
+1 14 1 U
+R 0 R 0
+1 14 2 U
+R 0 R 0
+1 14 3 U
+R 0 R 0
+1 14 4 U
+R 0 R 0
+1 14 5 U
+R 0 R 0
+1 14 6 U
+R 0 R 0
+1 14 7 U
+R 0 R 0
+1 14 8 U
+R 0 R 0
+1 14 9 U
+R 0 R 0
+1 14 10 U
+R 0 R 0
+1 14 11 U
+R 0 R 0
+1 14 12 U
+R 0 R 0
+1 14 13 U
+R 0 R 0
+1 14 14 U
+R 0 R 0
+1 14 15 U
+R 0 R 0
+1 14 16 U
+R 0 R 0
+1 14 17 U
+R 0 R 0
+1 14 18 U
+R 0 R 0
+1 14 19 U
+R 0 R 0
+1 15 0 U
+R 0 R 0
+1 15 1 U
+R 0 R 0
+1 15 2 U
+R 0 R 0
+1 15 3 U
+R 0 R 0
+1 15 4 U
+R 0 R 0
+1 15 5 U
+R 0 R 0
+1 15 6 U
+R 0 R 0
+1 15 7 U
+R 0 R 0
+1 15 8 U
+R 0 R 0
+1 15 9 U
+R 0 R 0
+1 15 10 U
+R 0 R 0
+1 15 11 U
+R 0 R 0
+1 15 12 U
+R 0 R 0
+1 15 13 U
+R 0 R 0
+1 15 14 U
+R 0 R 0
+1 15 15 U
+R 0 R 0
+1 15 16 U
+R 0 R 0
+1 15 17 U
+R 0 R 0
+1 15 18 U
+R 0 R 0
+1 15 19 U
+R 0 R 0
+1 16 0 U
+R 0 R 0
+1 16 1 U
+R 0 R 0
+1 16 2 U
+R 0 R 0
+1 16 3 U
+R 0 R 0
+1 16 4 U
+R 0 R 0
+1 16 5 U
+R 0 R 0
+1 16 6 U
+R 0 R 0
+1 16 7 U
+R 0 R 0
+1 16 8 U
+R 0 R 0
+1 16 9 U
+R 0 R 0
+1 16 10 U
+R 0 R 0
+1 16 11 U
+R 0 R 0
+1 16 12 U
+R 0 R 0
+1 16 13 U
+R 0 R 0
+1 16 14 U
+R 0 R 0
+1 16 15 U
+R 0 R 0
+1 16 16 U
+R 0 R 0
+1 16 17 U
+R 0 R 0
+1 16 18 U
+R 0 R 0
+1 16 19 U
+R 0 R 0
+1 17 0 U
+R 0 R 0
+1 17 1 U
+R 0 R 0
+1 17 2 U
+R 0 R 0
+1 17 3 U
+R 0 R 0
+1 17 4 U
+R 0 R 0
+1 17 5 U
+R 0 R 0
+1 17 6 U
+R 0 R 0
+1 17 7 U
+R 0 R 0
+1 17 8 U
+R 0 R 0
+1 17 9 U
+R 0 R 0
+1 17 10 U
+R 0 R 0
+1 17 11 U
+R 0 R 0
+1 17 12 U
+R 0 R 0
+1 17 13 U
+R 0 R 0
+1 17 14 U
+R 0 R 0
+1 17 15 U
+R 0 R 0
+1 17 16 U
+R 0 R 0
+1 17 17 U
+R 0 R 0
+1 17 18 U
+R 0 R 0
+1 17 19 U
+R 0 R 0
+1 18 0 U
+R 0 R 0
+1 18 1 U
+R 0 R 0
+1 18 2 U
+R 0 R 0
+1 18 3 U
+R 0 R 0
+1 18 4 U
+R 0 R 0
+1 18 5 U
+R 0 R 0
+1 18 6 U
+R 0 R 0
+1 18 7 U
+R 0 R 0
+1 18 8 U
+R 0 R 0
+1 18 9 U
+R 0 R 0
+1 18 10 U
+R 0 R 0
+1 18 11 U
+R 0 R 0
+1 18 12 U
+R 0 R 0
+1 18 13 U
+R 0 R 0
+1 18 14 U
+R 0 R 0
+1 18 15 U
+R 0 R 0
+1 18 16 U
+R 0 R 0
+1 18 17 U
+R 0 R 0
+1 18 18 U
+R 0 R 0
+1 18 19 U
+R 0 R 0
+1 19 0 U
+R 0 R 0
+1 19 1 U
+R 0 R 0
+1 19 2 U
+R 0 R 0
+1 19 3 U
+R 0 R 0
+1 19 4 U
+R 0 R 0
+1 19 5 U
+R 0 R 0
+1 19 6 U
+R 0 R 0
+1 19 7 U
+R 0 R 0
+1 19 8 U
+R 0 R 0
+1 19 9 U
+R 0 R 0
+1 19 10 U
+R 0 R 0
+1 19 11 U
+R 0 R 0
+1 19 12 U
+R 0 R 0
+1 19 13 U
+R 0 R 0
+1 19 14 U
+R 0 R 0
+1 19 15 U
+R 0 R 0
+1 19 16 U
+R 0 R 0
+1 19 17 U
+R 0 R 0
+1 19 18 U
+R 0 R 0
+1 19 19 U
+R 0 R 0
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+</pre></section>
+</div>
+</span>
+<span class="lang-en">
+
+<div class="part">
+<section>
+<h3>Story</h3><p>AtCoder Inc. is developing robots to guard its office.
+Each robot is controlled by a <a href="https://en.wikipedia.org/wiki/Finite-state_machine">finite-state automaton</a> that changes its state and actions depending on whether there is a wall in front of it.
+The required cost varies depending on the number of states in the automaton, the number of robots to be introduced, and the number of new walls to be installed.
+Please find a method with as low a cost as possible such that the entire office is patrolled periodically.</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Problem Statement</h3><p>There is an <var>N\times N</var> grid.
+Let the coordinates of the top-left cell be <var>(0,0)</var>, and define the coordinates of the cell reached by moving <var>i</var> cells downward and <var>j</var> cells to the right from there as <var>(i,j)</var>.
+The outer boundary of the <var>N\times N</var> grid is surrounded by walls, and there may also be walls between adjacent cells.</p>
+<p>Up to <var>N^2</var> robots can be introduced.
+For each robot, up to <var>4N^2</var> internal states can be defined.
+Each robot is controlled by an automaton that, depending on whether there is a wall in front of it (i.e., whether there is a wall between the current cell and the cell one step ahead in the current direction) and its current internal state, determines an action among going forward, turning right, and turning left, as well as the next internal state.</p>
+<p>Going forward (<code>F</code>) moves one cell forward in the current direction, and the direction does not change.
+Turning right (<code>R</code>) and turning left (<code>L</code>) refer to changing direction in place without moving to another cell.</p>
+<p>One step of operation is performed in the following order.
+First, from the current (position, direction, internal state), the robot determines whether there is a wall in front.
+Next, it determines the action and the next state.
+Then it performs the action, and finally it updates the internal state to the next state.</p>
+<p>Let <var>m_k</var> be the number of internal states of the automaton that controls the <var>k</var>-th robot. You may choose <var>m_k</var> arbitrarily.
+Then, for each state <var>s=0,1,\cdots,m_k-1</var>, specify the following.</p>
+<ul>
+<li><var>a_{k,s,0}</var>: Which of turning right (<code>R</code>), turning left (<code>L</code>), or going forward (<code>F</code>) to perform when there is no wall in front.</li>
+<li><var>b_{k,s,0}</var>: The next state number when there is no wall in front.</li>
+<li><var>a_{k,s,1}</var>: Which of turning right (<code>R</code>) or turning left (<code>L</code>) to perform when there is a wall in front. Going forward (<code>F</code>) cannot be chosen.</li>
+<li><var>b_{k,s,1}</var>: The next state number when there is a wall in front.</li>
+</ul>
+<h4>Example</h4>
+<blockquote>
+<p>Consider the following automaton with 2 internal states.</p>
+<p><table class="table table-bordered">
+    <tr>
+        <th><var>s</var></th>
+        <th><var>a_{k,s,0}</var></th>
+        <th><var>b_{k,s,0}</var></th>
+        <th><var>a_{k,s,1}</var></th>
+        <th><var>b_{k,s,1}</var></th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>F</td>
+        <td>0</td>
+        <td>R</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>R</td>
+        <td>0</td>
+        <td>R</td>
+        <td>0</td>
+    </tr>
+</table></p>
+<p><img alt="Example" src="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW_en.svg" /></p>
+<p>This automaton operates as follows.</p>
+<ul>
+<li>When the internal state is 0, it goes forward as long as there is no wall in front, and if there is a wall in front, it turns right and transitions to internal state 1.</li>
+<li>When the internal state is 1, it turns right regardless of whether there is a wall in front, and transitions to internal state 0.</li>
+</ul>
+<p>In other words, it repeats the behavior of going forward as long as there is no wall in front, and making a U-turn just in front of a wall.</p>
+</blockquote>
+<p>Next, for each robot <var>k</var>, determine its position <var>(i_k,j_k)</var> and direction <var>d_k</var> in the initial placement (up: <code>U</code>, down: <code>D</code>, left: <code>L</code>, right: <code>R</code>).
+The initial value of the internal state is <var>0</var>.
+Robots do not interfere with each other, and multiple robots may occupy the same cell.</p>
+<p>Finally, install new walls.
+A wall can be installed between any two adjacent cells.
+You may specify a position where a wall already exists, but nothing happens other than increasing the cost.
+It is allowed for the board to become disconnected due to newly installed walls.</p>
+<p>For each robot, the set of (position, direction, internal state) is finite, and the next-time (position, direction, internal state) corresponding to the same set is uniquely determined.
+Therefore, after some time has passed, it will inevitably enter periodic behavior.
+Define the cells that the robot visits during this periodic behavior as the cells patrolled by that robot.
+Cells that are visited only before entering periodic behavior are not included in the cells patrolled.</p>
+<p>Let <var>K</var> be the number of robots to be introduced, let <var>M=\sum_k m_k</var> be the total number of internal states over all robots,
+and let <var>W</var> be the number of newly installed walls specified in the output (the number of <code>1</code>s in the output).
+Given the coefficients <var>A_K</var>, <var>A_M</var>, and <var>A_W</var> provided in the input, define the introduction cost <var>V</var> as follows.</p>
+<p>\[
+V = A_K \times (K-1) + A_M \times M + A_W \times W
+\]</p>
+<p>Find a method with as low an introduction cost as possible such that every cell becomes a cell patrolled by at least one robot.
+If there exists a cell that does not become a patrolled cell, it will be judged as <span class='label label-warning' data-toggle='tooltip' data-placement='top' title="Wrong Answer">WA</span>.</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Scoring</h3><p>When the introduction cost is <var>V</var>, you obtain the following score.</p>
+<p>\[
+1+\mathrm{round}\left(10^6\times \max\left(0,\log_2 \frac{A_K (N^2-1) + A_M N^2}{V}\right)\right)
+\]</p>
+<p>Depending on the coefficients <var>A_K</var>, <var>A_M</var>, and <var>A_W</var>, the problem is divided into three subproblems: A, B, and C.
+Each subproblem contains 150 test cases, and the total score for a submission to that subproblem is the sum of the scores from all test cases in it.
+If your submission produces an illegal output or exceeds the time limit for some test cases, the submission itself will be judged as <span class='label label-warning' data-toggle='tooltip' data-placement='top' title="Wrong Answer">WA</span> or <span class='label label-warning' data-toggle='tooltip' data-placement='top' title="Time Limit Exceeded">TLE</span> , and the score of the submission will be zero.</p>
+<p>The final ranking is determined by the sum of the highest scores obtained for each subproblem, and there will be no system test after the contest.
+If more than one team gets the same score, they will be ranked in the same place regardless of the submission time.</p>
+</section>
+</div>
+
+<hr />
+<div class="io-style">
+<div class="part">
+<section>
+<h3>Input</h3><p>The input is given from Standard Input in the following format.</p>
+<pre><var>N</var> <var>A_K</var> <var>A_M</var> <var>A_W</var>
+<var>v_{0,0} \cdots v_{0,N-2}</var>
+<var>\vdots</var>
+<var>v_{N-1,0} \cdots v_{N-1,N-2}</var>
+<var>h_{0,0} \cdots h_{0,N-1}</var>
+<var>\vdots</var>
+<var>h_{N-2,0} \cdots h_{N-2,N-1}</var>
+</pre>
+<ul>
+<li>The board size <var>N</var> is fixed to <var>N=20</var> for all test cases.</li>
+<li>The coefficients <var>A_K</var>, <var>A_M</var>, and <var>A_W</var> of the introduction cost are integers between <var>0</var> and <var>1000</var>, inclusive.</li>
+<li><var>v_{i,0} \cdots v_{i,N-2}</var> is a string of length <var>N-1</var> consisting of <code>0</code> and <code>1</code>, and the <var>j</var>-th character <var>v_{i,j}</var> indicates whether there is (<code>1</code>) or is not (<code>0</code>) a wall between cell <var>(i, j)</var> and cell <var>(i, j+1)</var>.</li>
+<li><var>h_{i,0} \cdots h_{i,N-1}</var> is a string of length <var>N</var> consisting of <code>0</code> and <code>1</code>, and the <var>j</var>-th character <var>h_{i,j}</var> indicates whether there is (<code>1</code>) or is not (<code>0</code>) a wall between cell <var>(i, j)</var> and cell <var>(i+1, j)</var>.</li>
+<li>In the initial state, it is guaranteed that all cells are mutually reachable.</li>
+</ul>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Output</h3><p>Print to Standard Output in the following format.</p>
+<pre><var>K</var>
+<var>m_0</var> <var>i_0</var> <var>j_0</var> <var>d_0</var>
+<var>a_{0,0,0}</var> <var>b_{0,0,0}</var> <var>a_{0,0,1}</var> <var>b_{0,0,1}</var>
+<var>\vdots</var>
+<var>a_{0,m_0-1,0}</var> <var>b_{0,m_0-1,0}</var> <var>a_{0,m_0-1,1}</var> <var>b_{0,m_0-1,1}</var>
+<var>\vdots</var>
+<var>m_{K-1}</var> <var>i_{K-1}</var> <var>j_{K-1}</var> <var>d_{K-1}</var>
+<var>a_{K-1,0,0}</var> <var>b_{K-1,0,0}</var> <var>a_{K-1,0,1}</var> <var>b_{K-1,0,1}</var>
+<var>\vdots</var>
+<var>a_{K-1,m_{K-1}-1,0}</var> <var>b_{K-1,m_{K-1}-1,0}</var> <var>a_{K-1,m_{K-1}-1,1}</var> <var>b_{K-1,m_{K-1}-1,1}</var>
+<var>v_{0,0}' \cdots v_{0,N-2}'</var>
+<var>\vdots</var>
+<var>v_{N-1,0}' \cdots v_{N-1,N-2}'</var>
+<var>h_{0,0}' \cdots h_{0,N-1}'</var>
+<var>\vdots</var>
+<var>h_{N-2,0}' \cdots h_{N-2,N-1}'</var>
+</pre>
+<ul>
+<li><var>K</var> is the number of robots to be developed, and it must satisfy <var>1\leq K\leq N^2</var>.</li>
+<li><var>m_k</var> is the number of internal states of the <var>k</var>-th robot, and it must satisfy <var>1\leq m_k\leq 4N^2</var>.</li>
+<li><var>(i_k,j_k)</var> is the initial position of the <var>k</var>-th robot, and it must satisfy <var>0\leq i_k,j_k\leq N-1</var>.</li>
+<li><var>d_k</var> is the initial direction of the <var>k</var>-th robot, and is one of the characters up: <code>U</code>, down: <code>D</code>, left: <code>L</code>, right: <code>R</code>.</li>
+<li>For each robot <var>k</var>, you must output exactly <var>m_k</var> lines in the order of internal state <var>s=0,1,\dots,m_k-1</var>.<ul>
+<li><var>a_{k,s,0}</var> and <var>a_{k,s,1}</var> represent the action of robot <var>k</var> when its internal state is <var>s</var>. For the cases where there is no wall in front and where there is a wall in front, respectively, specify one of turn right: <code>R</code>, turn left: <code>L</code>, or go forward: <code>F</code>. However, <var>a_{k,s,1}</var> must not be <code>F</code>.</li>
+<li><var>b_{k,s,0}</var> and <var>b_{k,s,1}</var> represent the next internal state number when robot <var>k</var> is in internal state <var>s</var>. For the cases where there is no wall in front and where there is a wall in front, respectively, they must satisfy <var>0\leq b_{k,s,0}, b_{k,s,1}\leq m_k-1</var>.</li>
+</ul>
+</li>
+<li><var>v_{i,0}' \cdots v_{i,N-2}'</var> is a string of length <var>N-1</var> consisting of <code>0</code> and <code>1</code>, and the <var>j</var>-th character <var>v_{i,j}'</var> indicates whether to install (<code>1</code>) or not install (<code>0</code>) a new wall between cell <var>(i, j)</var> and cell <var>(i, j+1)</var>.</li>
+<li><var>h_{i,0}' \cdots h_{i,N-1}'</var> is a string of length <var>N</var> consisting of <code>0</code> and <code>1</code>, and the <var>j</var>-th character <var>h_{i,j}'</var> indicates whether to install (<code>1</code>) or not install (<code>0</code>) a new wall between cell <var>(i, j)</var> and cell <var>(i+1, j)</var>.</li>
+<li>The board may become disconnected due to wall installation.</li>
+</ul>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Sample Solution</h3><details>
+A sample solution in Python is shown.
+In this program, one robot that keeps turning right in place is placed on each cell.
+
+<pre class="prettyprint linenums">
+import sys
+input = sys.stdin.readline
+
+N, AK, AM, AW = map(int, input().split())
+wall_v = [input().strip() for _ in range(N)]
+wall_h = [input().strip() for _ in range(N - 1)]
+
+K = N * N
+print(K)
+
+for i in range(N):
+    for j in range(N):
+        m = 1
+        d = 'U'
+        print(m, i, j, d)
+        print('R 0 R 0')
+
+for _ in range(N):
+    print('0' * (N - 1))
+for _ in range(N - 1):
+    print('0' * N)
+</pre>
+
+</details>
+
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Input Generation</h3><p>For each of the tasks A, B, and C, the coefficients are generated uniformly at random from the ranges (closed intervals) listed in the following table.</p>
+<table class="table table-bordered" style="width: auto;">
+<thead>
+<tr>
+<th>Task</th>
+<th><var>A_K</var></th>
+<th><var>A_M</var></th>
+<th><var>A_W</var></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><var>[0,0]</var></td>
+<td><var>[1,1]</var></td>
+<td><var>[1000,1000]</var></td>
+</tr>
+<tr>
+<td>B</td>
+<td><var>[1000,1000]</var></td>
+<td><var>[1,10]</var></td>
+<td><var>[1,10]</var></td>
+</tr>
+<tr>
+<td>C</td>
+<td><var>[1000,1000]</var></td>
+<td><var>[1,1]</var></td>
+<td><var>[1000,1000]</var></td>
+</tr>
+</tbody>
+</table>
+
+<h4>Generation of walls</h4>
+<p>Let <var>\mathrm{rand}(L, U)</var> be a function that generates an integer uniformly at random between <var>L</var> and <var>U</var>, inclusive.</p>
+<p>First, generate the number of vertical wall generations <var>X=\mathrm{rand}(1,6)</var> and the number of horizontal wall generations <var>Y=\mathrm{rand}(1,6)</var>.</p>
+<p>Starting from a state with no walls at all, generate walls as follows.</p>
+<p>Repeat the following operation <var>X</var> times.</p>
+<ol>
+<li>Randomly decide whether to generate the wall upward or downward.</li>
+<li>Generate the wall length by <var>L = \mathrm{rand}(5, 15)</var>.</li>
+<li>Choose the starting point <var>(i, j)</var> by <var>i = \mathrm{rand}(0, N-1),\ j = \mathrm{rand}(0, N-2)</var>.</li>
+<li>If the direction is upward, set <var>v_{i-L+1, j}, \cdots, v_{i, j}</var> to <code>1</code>; if the direction is downward, set <var>v_{i, j}, \cdots, v_{i+L-1, j}</var> to <code>1</code>. Terms whose indices go out of the board range are ignored.</li>
+</ol>
+<p>Repeat the following operation <var>Y</var> times.</p>
+<ol>
+<li>Randomly decide whether to generate the wall from the left or from the right.</li>
+<li>Generate the wall length by <var>L = \mathrm{rand}(5, 15)</var>.</li>
+<li>Choose the starting point <var>(i, j)</var> by <var>i = \mathrm{rand}(0, N-2),\ j = \mathrm{rand}(0, N-1)</var>.</li>
+<li>If the direction is leftward, set <var>h_{i, j-L+1}, \cdots, h_{i, j}</var> to <code>1</code>; if the direction is rightward, set <var>h_{i, j}, \cdots, h_{i, j+L-1}</var> to <code>1</code>. Terms whose indices go out of the board range are ignored.</li>
+</ol>
+<p>For the generated walls, check whether all cells are reachable. If some cells are unreachable, reset the walls and redo the wall generation (do not regenerate <var>X</var> and <var>Y</var>).</p>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Tools (Input generator and score calculation)</h3><ul>
+<li><a href="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW.zip">Local version</a>: You need a compilation environment of <a href="https://www.rust-lang.org/">Rust language</a>.<ul>
+<li><a href="https://img.atcoder.jp/masters2026-qual/Cy1HtjaW_windows.zip">Pre-compiled binary for Windows</a>: If you are not familiar with the Rust language environment, please use this instead.</li>
+</ul>
+</li>
+</ul>
+<p>Please be aware that sharing visualization results or discussing solutions/ideas outside of the team during the contest is prohibited.</p>
+</section>
+</div>
+</div>
+
+<hr />
+<div class="part">
+<section>
+<h3>Sample Input 1</h3><pre style="max-height:200px;overflow-y:scroll">20 0 1 1000
+0010000000000000000
+0010000000000000000
+0010000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000000000
+0001000000000010000
+0001000000000010000
+0001010000000010000
+0001010000000010000
+0001010000000010000
+0001010000000010000
+0000010000000010000
+0000000000000010000
+0000000000000000000
+00000000000000000000
+00000000111111111110
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+</pre>
+</section>
+</div>
+
+<div class="part">
+<section>
+<h3>Sample Output 1</h3><pre style="max-height:200px;overflow-y:scroll">400
+1 0 0 U
+R 0 R 0
+1 0 1 U
+R 0 R 0
+1 0 2 U
+R 0 R 0
+1 0 3 U
+R 0 R 0
+1 0 4 U
+R 0 R 0
+1 0 5 U
+R 0 R 0
+1 0 6 U
+R 0 R 0
+1 0 7 U
+R 0 R 0
+1 0 8 U
+R 0 R 0
+1 0 9 U
+R 0 R 0
+1 0 10 U
+R 0 R 0
+1 0 11 U
+R 0 R 0
+1 0 12 U
+R 0 R 0
+1 0 13 U
+R 0 R 0
+1 0 14 U
+R 0 R 0
+1 0 15 U
+R 0 R 0
+1 0 16 U
+R 0 R 0
+1 0 17 U
+R 0 R 0
+1 0 18 U
+R 0 R 0
+1 0 19 U
+R 0 R 0
+1 1 0 U
+R 0 R 0
+1 1 1 U
+R 0 R 0
+1 1 2 U
+R 0 R 0
+1 1 3 U
+R 0 R 0
+1 1 4 U
+R 0 R 0
+1 1 5 U
+R 0 R 0
+1 1 6 U
+R 0 R 0
+1 1 7 U
+R 0 R 0
+1 1 8 U
+R 0 R 0
+1 1 9 U
+R 0 R 0
+1 1 10 U
+R 0 R 0
+1 1 11 U
+R 0 R 0
+1 1 12 U
+R 0 R 0
+1 1 13 U
+R 0 R 0
+1 1 14 U
+R 0 R 0
+1 1 15 U
+R 0 R 0
+1 1 16 U
+R 0 R 0
+1 1 17 U
+R 0 R 0
+1 1 18 U
+R 0 R 0
+1 1 19 U
+R 0 R 0
+1 2 0 U
+R 0 R 0
+1 2 1 U
+R 0 R 0
+1 2 2 U
+R 0 R 0
+1 2 3 U
+R 0 R 0
+1 2 4 U
+R 0 R 0
+1 2 5 U
+R 0 R 0
+1 2 6 U
+R 0 R 0
+1 2 7 U
+R 0 R 0
+1 2 8 U
+R 0 R 0
+1 2 9 U
+R 0 R 0
+1 2 10 U
+R 0 R 0
+1 2 11 U
+R 0 R 0
+1 2 12 U
+R 0 R 0
+1 2 13 U
+R 0 R 0
+1 2 14 U
+R 0 R 0
+1 2 15 U
+R 0 R 0
+1 2 16 U
+R 0 R 0
+1 2 17 U
+R 0 R 0
+1 2 18 U
+R 0 R 0
+1 2 19 U
+R 0 R 0
+1 3 0 U
+R 0 R 0
+1 3 1 U
+R 0 R 0
+1 3 2 U
+R 0 R 0
+1 3 3 U
+R 0 R 0
+1 3 4 U
+R 0 R 0
+1 3 5 U
+R 0 R 0
+1 3 6 U
+R 0 R 0
+1 3 7 U
+R 0 R 0
+1 3 8 U
+R 0 R 0
+1 3 9 U
+R 0 R 0
+1 3 10 U
+R 0 R 0
+1 3 11 U
+R 0 R 0
+1 3 12 U
+R 0 R 0
+1 3 13 U
+R 0 R 0
+1 3 14 U
+R 0 R 0
+1 3 15 U
+R 0 R 0
+1 3 16 U
+R 0 R 0
+1 3 17 U
+R 0 R 0
+1 3 18 U
+R 0 R 0
+1 3 19 U
+R 0 R 0
+1 4 0 U
+R 0 R 0
+1 4 1 U
+R 0 R 0
+1 4 2 U
+R 0 R 0
+1 4 3 U
+R 0 R 0
+1 4 4 U
+R 0 R 0
+1 4 5 U
+R 0 R 0
+1 4 6 U
+R 0 R 0
+1 4 7 U
+R 0 R 0
+1 4 8 U
+R 0 R 0
+1 4 9 U
+R 0 R 0
+1 4 10 U
+R 0 R 0
+1 4 11 U
+R 0 R 0
+1 4 12 U
+R 0 R 0
+1 4 13 U
+R 0 R 0
+1 4 14 U
+R 0 R 0
+1 4 15 U
+R 0 R 0
+1 4 16 U
+R 0 R 0
+1 4 17 U
+R 0 R 0
+1 4 18 U
+R 0 R 0
+1 4 19 U
+R 0 R 0
+1 5 0 U
+R 0 R 0
+1 5 1 U
+R 0 R 0
+1 5 2 U
+R 0 R 0
+1 5 3 U
+R 0 R 0
+1 5 4 U
+R 0 R 0
+1 5 5 U
+R 0 R 0
+1 5 6 U
+R 0 R 0
+1 5 7 U
+R 0 R 0
+1 5 8 U
+R 0 R 0
+1 5 9 U
+R 0 R 0
+1 5 10 U
+R 0 R 0
+1 5 11 U
+R 0 R 0
+1 5 12 U
+R 0 R 0
+1 5 13 U
+R 0 R 0
+1 5 14 U
+R 0 R 0
+1 5 15 U
+R 0 R 0
+1 5 16 U
+R 0 R 0
+1 5 17 U
+R 0 R 0
+1 5 18 U
+R 0 R 0
+1 5 19 U
+R 0 R 0
+1 6 0 U
+R 0 R 0
+1 6 1 U
+R 0 R 0
+1 6 2 U
+R 0 R 0
+1 6 3 U
+R 0 R 0
+1 6 4 U
+R 0 R 0
+1 6 5 U
+R 0 R 0
+1 6 6 U
+R 0 R 0
+1 6 7 U
+R 0 R 0
+1 6 8 U
+R 0 R 0
+1 6 9 U
+R 0 R 0
+1 6 10 U
+R 0 R 0
+1 6 11 U
+R 0 R 0
+1 6 12 U
+R 0 R 0
+1 6 13 U
+R 0 R 0
+1 6 14 U
+R 0 R 0
+1 6 15 U
+R 0 R 0
+1 6 16 U
+R 0 R 0
+1 6 17 U
+R 0 R 0
+1 6 18 U
+R 0 R 0
+1 6 19 U
+R 0 R 0
+1 7 0 U
+R 0 R 0
+1 7 1 U
+R 0 R 0
+1 7 2 U
+R 0 R 0
+1 7 3 U
+R 0 R 0
+1 7 4 U
+R 0 R 0
+1 7 5 U
+R 0 R 0
+1 7 6 U
+R 0 R 0
+1 7 7 U
+R 0 R 0
+1 7 8 U
+R 0 R 0
+1 7 9 U
+R 0 R 0
+1 7 10 U
+R 0 R 0
+1 7 11 U
+R 0 R 0
+1 7 12 U
+R 0 R 0
+1 7 13 U
+R 0 R 0
+1 7 14 U
+R 0 R 0
+1 7 15 U
+R 0 R 0
+1 7 16 U
+R 0 R 0
+1 7 17 U
+R 0 R 0
+1 7 18 U
+R 0 R 0
+1 7 19 U
+R 0 R 0
+1 8 0 U
+R 0 R 0
+1 8 1 U
+R 0 R 0
+1 8 2 U
+R 0 R 0
+1 8 3 U
+R 0 R 0
+1 8 4 U
+R 0 R 0
+1 8 5 U
+R 0 R 0
+1 8 6 U
+R 0 R 0
+1 8 7 U
+R 0 R 0
+1 8 8 U
+R 0 R 0
+1 8 9 U
+R 0 R 0
+1 8 10 U
+R 0 R 0
+1 8 11 U
+R 0 R 0
+1 8 12 U
+R 0 R 0
+1 8 13 U
+R 0 R 0
+1 8 14 U
+R 0 R 0
+1 8 15 U
+R 0 R 0
+1 8 16 U
+R 0 R 0
+1 8 17 U
+R 0 R 0
+1 8 18 U
+R 0 R 0
+1 8 19 U
+R 0 R 0
+1 9 0 U
+R 0 R 0
+1 9 1 U
+R 0 R 0
+1 9 2 U
+R 0 R 0
+1 9 3 U
+R 0 R 0
+1 9 4 U
+R 0 R 0
+1 9 5 U
+R 0 R 0
+1 9 6 U
+R 0 R 0
+1 9 7 U
+R 0 R 0
+1 9 8 U
+R 0 R 0
+1 9 9 U
+R 0 R 0
+1 9 10 U
+R 0 R 0
+1 9 11 U
+R 0 R 0
+1 9 12 U
+R 0 R 0
+1 9 13 U
+R 0 R 0
+1 9 14 U
+R 0 R 0
+1 9 15 U
+R 0 R 0
+1 9 16 U
+R 0 R 0
+1 9 17 U
+R 0 R 0
+1 9 18 U
+R 0 R 0
+1 9 19 U
+R 0 R 0
+1 10 0 U
+R 0 R 0
+1 10 1 U
+R 0 R 0
+1 10 2 U
+R 0 R 0
+1 10 3 U
+R 0 R 0
+1 10 4 U
+R 0 R 0
+1 10 5 U
+R 0 R 0
+1 10 6 U
+R 0 R 0
+1 10 7 U
+R 0 R 0
+1 10 8 U
+R 0 R 0
+1 10 9 U
+R 0 R 0
+1 10 10 U
+R 0 R 0
+1 10 11 U
+R 0 R 0
+1 10 12 U
+R 0 R 0
+1 10 13 U
+R 0 R 0
+1 10 14 U
+R 0 R 0
+1 10 15 U
+R 0 R 0
+1 10 16 U
+R 0 R 0
+1 10 17 U
+R 0 R 0
+1 10 18 U
+R 0 R 0
+1 10 19 U
+R 0 R 0
+1 11 0 U
+R 0 R 0
+1 11 1 U
+R 0 R 0
+1 11 2 U
+R 0 R 0
+1 11 3 U
+R 0 R 0
+1 11 4 U
+R 0 R 0
+1 11 5 U
+R 0 R 0
+1 11 6 U
+R 0 R 0
+1 11 7 U
+R 0 R 0
+1 11 8 U
+R 0 R 0
+1 11 9 U
+R 0 R 0
+1 11 10 U
+R 0 R 0
+1 11 11 U
+R 0 R 0
+1 11 12 U
+R 0 R 0
+1 11 13 U
+R 0 R 0
+1 11 14 U
+R 0 R 0
+1 11 15 U
+R 0 R 0
+1 11 16 U
+R 0 R 0
+1 11 17 U
+R 0 R 0
+1 11 18 U
+R 0 R 0
+1 11 19 U
+R 0 R 0
+1 12 0 U
+R 0 R 0
+1 12 1 U
+R 0 R 0
+1 12 2 U
+R 0 R 0
+1 12 3 U
+R 0 R 0
+1 12 4 U
+R 0 R 0
+1 12 5 U
+R 0 R 0
+1 12 6 U
+R 0 R 0
+1 12 7 U
+R 0 R 0
+1 12 8 U
+R 0 R 0
+1 12 9 U
+R 0 R 0
+1 12 10 U
+R 0 R 0
+1 12 11 U
+R 0 R 0
+1 12 12 U
+R 0 R 0
+1 12 13 U
+R 0 R 0
+1 12 14 U
+R 0 R 0
+1 12 15 U
+R 0 R 0
+1 12 16 U
+R 0 R 0
+1 12 17 U
+R 0 R 0
+1 12 18 U
+R 0 R 0
+1 12 19 U
+R 0 R 0
+1 13 0 U
+R 0 R 0
+1 13 1 U
+R 0 R 0
+1 13 2 U
+R 0 R 0
+1 13 3 U
+R 0 R 0
+1 13 4 U
+R 0 R 0
+1 13 5 U
+R 0 R 0
+1 13 6 U
+R 0 R 0
+1 13 7 U
+R 0 R 0
+1 13 8 U
+R 0 R 0
+1 13 9 U
+R 0 R 0
+1 13 10 U
+R 0 R 0
+1 13 11 U
+R 0 R 0
+1 13 12 U
+R 0 R 0
+1 13 13 U
+R 0 R 0
+1 13 14 U
+R 0 R 0
+1 13 15 U
+R 0 R 0
+1 13 16 U
+R 0 R 0
+1 13 17 U
+R 0 R 0
+1 13 18 U
+R 0 R 0
+1 13 19 U
+R 0 R 0
+1 14 0 U
+R 0 R 0
+1 14 1 U
+R 0 R 0
+1 14 2 U
+R 0 R 0
+1 14 3 U
+R 0 R 0
+1 14 4 U
+R 0 R 0
+1 14 5 U
+R 0 R 0
+1 14 6 U
+R 0 R 0
+1 14 7 U
+R 0 R 0
+1 14 8 U
+R 0 R 0
+1 14 9 U
+R 0 R 0
+1 14 10 U
+R 0 R 0
+1 14 11 U
+R 0 R 0
+1 14 12 U
+R 0 R 0
+1 14 13 U
+R 0 R 0
+1 14 14 U
+R 0 R 0
+1 14 15 U
+R 0 R 0
+1 14 16 U
+R 0 R 0
+1 14 17 U
+R 0 R 0
+1 14 18 U
+R 0 R 0
+1 14 19 U
+R 0 R 0
+1 15 0 U
+R 0 R 0
+1 15 1 U
+R 0 R 0
+1 15 2 U
+R 0 R 0
+1 15 3 U
+R 0 R 0
+1 15 4 U
+R 0 R 0
+1 15 5 U
+R 0 R 0
+1 15 6 U
+R 0 R 0
+1 15 7 U
+R 0 R 0
+1 15 8 U
+R 0 R 0
+1 15 9 U
+R 0 R 0
+1 15 10 U
+R 0 R 0
+1 15 11 U
+R 0 R 0
+1 15 12 U
+R 0 R 0
+1 15 13 U
+R 0 R 0
+1 15 14 U
+R 0 R 0
+1 15 15 U
+R 0 R 0
+1 15 16 U
+R 0 R 0
+1 15 17 U
+R 0 R 0
+1 15 18 U
+R 0 R 0
+1 15 19 U
+R 0 R 0
+1 16 0 U
+R 0 R 0
+1 16 1 U
+R 0 R 0
+1 16 2 U
+R 0 R 0
+1 16 3 U
+R 0 R 0
+1 16 4 U
+R 0 R 0
+1 16 5 U
+R 0 R 0
+1 16 6 U
+R 0 R 0
+1 16 7 U
+R 0 R 0
+1 16 8 U
+R 0 R 0
+1 16 9 U
+R 0 R 0
+1 16 10 U
+R 0 R 0
+1 16 11 U
+R 0 R 0
+1 16 12 U
+R 0 R 0
+1 16 13 U
+R 0 R 0
+1 16 14 U
+R 0 R 0
+1 16 15 U
+R 0 R 0
+1 16 16 U
+R 0 R 0
+1 16 17 U
+R 0 R 0
+1 16 18 U
+R 0 R 0
+1 16 19 U
+R 0 R 0
+1 17 0 U
+R 0 R 0
+1 17 1 U
+R 0 R 0
+1 17 2 U
+R 0 R 0
+1 17 3 U
+R 0 R 0
+1 17 4 U
+R 0 R 0
+1 17 5 U
+R 0 R 0
+1 17 6 U
+R 0 R 0
+1 17 7 U
+R 0 R 0
+1 17 8 U
+R 0 R 0
+1 17 9 U
+R 0 R 0
+1 17 10 U
+R 0 R 0
+1 17 11 U
+R 0 R 0
+1 17 12 U
+R 0 R 0
+1 17 13 U
+R 0 R 0
+1 17 14 U
+R 0 R 0
+1 17 15 U
+R 0 R 0
+1 17 16 U
+R 0 R 0
+1 17 17 U
+R 0 R 0
+1 17 18 U
+R 0 R 0
+1 17 19 U
+R 0 R 0
+1 18 0 U
+R 0 R 0
+1 18 1 U
+R 0 R 0
+1 18 2 U
+R 0 R 0
+1 18 3 U
+R 0 R 0
+1 18 4 U
+R 0 R 0
+1 18 5 U
+R 0 R 0
+1 18 6 U
+R 0 R 0
+1 18 7 U
+R 0 R 0
+1 18 8 U
+R 0 R 0
+1 18 9 U
+R 0 R 0
+1 18 10 U
+R 0 R 0
+1 18 11 U
+R 0 R 0
+1 18 12 U
+R 0 R 0
+1 18 13 U
+R 0 R 0
+1 18 14 U
+R 0 R 0
+1 18 15 U
+R 0 R 0
+1 18 16 U
+R 0 R 0
+1 18 17 U
+R 0 R 0
+1 18 18 U
+R 0 R 0
+1 18 19 U
+R 0 R 0
+1 19 0 U
+R 0 R 0
+1 19 1 U
+R 0 R 0
+1 19 2 U
+R 0 R 0
+1 19 3 U
+R 0 R 0
+1 19 4 U
+R 0 R 0
+1 19 5 U
+R 0 R 0
+1 19 6 U
+R 0 R 0
+1 19 7 U
+R 0 R 0
+1 19 8 U
+R 0 R 0
+1 19 9 U
+R 0 R 0
+1 19 10 U
+R 0 R 0
+1 19 11 U
+R 0 R 0
+1 19 12 U
+R 0 R 0
+1 19 13 U
+R 0 R 0
+1 19 14 U
+R 0 R 0
+1 19 15 U
+R 0 R 0
+1 19 16 U
+R 0 R 0
+1 19 17 U
+R 0 R 0
+1 19 18 U
+R 0 R 0
+1 19 19 U
+R 0 R 0
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+0000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+00000000000000000000
+</pre></section>
+</div>
+</span>
+</span>
+
+		</div>
+
+		
+
+		
+		<hr/>
+		<form class="form-horizontal form-code-submit" action="/contests/masters2026-qual/submit" method="POST">
+			<input type="hidden" name="data.TaskScreenName" value="masters2026_qual_a" />
+			
+			<div class="form-group ">
+				<label class="control-label col-sm-3 col-md-2" for="select-lang">言語</label>
+				<div id="select-lang" class="col-sm-5" data-name="data.LanguageId">
+					<select class="form-control current" data-placeholder="-" name="data.LanguageId" required>
+						<option></option>
+						
+							<option value="6001" data-ace-mode="text">&gt;&lt;&gt; (fishr 0.1.0)</option>
+						
+							<option value="6002" data-ace-mode="ada">Ada 2022 (GNAT 15.2.0)</option>
+						
+							<option value="6003" data-ace-mode="text">APL (GNU APL 1.9)</option>
+						
+							<option value="6004" data-ace-mode="mips">Assembly MIPS O32 ABI (GNU assembler 2.42)</option>
+						
+							<option value="6005" data-ace-mode="assembly_x86">Assembly x64 (NASM 2.16.03)</option>
+						
+							<option value="6006" data-ace-mode="text">AWK (GNU awk 5.2.1)</option>
+						
+							<option value="6007" data-ace-mode="text">A言語 (interpreter af48a2a)</option>
+						
+							<option value="6008" data-ace-mode="sh">Bash (bash 5.3)</option>
+						
+							<option value="6009" data-ace-mode="basic">BASIC (FreeBASIC 1.10.1)</option>
+						
+							<option value="6010" data-ace-mode="text">bc (GNU bc 1.08.2)</option>
+						
+							<option value="6011" data-ace-mode="text">Befunge93 (TBC 1.0)</option>
+						
+							<option value="6012" data-ace-mode="text">Brainfuck (Tritium 1.2.73)</option>
+						
+							<option value="6013" data-ace-mode="c_cpp">C23 (Clang 21.1.0)</option>
+						
+							<option value="6014" data-ace-mode="c_cpp">C23 (GCC 14.2.0)</option>
+						
+							<option value="6015" data-ace-mode="csharp">C# 13.0 (.NET 9.0.8)</option>
+						
+							<option value="6016" data-ace-mode="csharp">C# 13.0 (.NET Native AOT 9.0.8)</option>
+						
+							<option value="6017" data-ace-mode="c_cpp">C&#43;&#43;23 (GCC 15.2.0)</option>
+						
+							<option value="6018" data-ace-mode="text">C3 (c3c 0.7.5)</option>
+						
+							<option value="6019" data-ace-mode="text">Carp(Carp 0.5.5)</option>
+						
+							<option value="6020" data-ace-mode="c_cpp">cLay (cLay 20250308-1 (GCC 15.2.0))</option>
+						
+							<option value="6021" data-ace-mode="clojure">Clojure (babashka 1.12.208)</option>
+						
+							<option value="6022" data-ace-mode="clojure">Clojure (clojure 1.12.2)</option>
+						
+							<option value="6023" data-ace-mode="clojure">Clojure (Clojure AOT 1.12.2)</option>
+						
+							<option value="6025" data-ace-mode="clojure">Clojure (ClojureScript 1.12.42 (Clojure 1.12.2 Node.js 22.19.0))</option>
+						
+							<option value="6026" data-ace-mode="cobol">COBOL (Free) (GnuCOBOL 3.2)</option>
+						
+							<option value="6027" data-ace-mode="lisp">Common Lisp (SBCL 2.5.8)</option>
+						
+							<option value="6028" data-ace-mode="crystal">Crystal (Crystal 1.17.0)</option>
+						
+							<option value="6029" data-ace-mode="text">Cyber (Cyber v0.3)</option>
+						
+							<option value="6030" data-ace-mode="d">D (DMD 2.111.0)</option>
+						
+							<option value="6031" data-ace-mode="d">D (GDC 15.2)</option>
+						
+							<option value="6032" data-ace-mode="d">D (LDC 1.41.0)</option>
+						
+							<option value="6033" data-ace-mode="dart">Dart (Dart 3.9.2)</option>
+						
+							<option value="6034" data-ace-mode="text">dc 1.5.2 (GNU bc 1.08.2)</option>
+						
+							<option value="6035" data-ace-mode="prolog">ECLiPSe (ECLiPSe 7.1_13)</option>
+						
+							<option value="6036" data-ace-mode="eiffel">Eiffel (Gobo Eiffel 22.01)</option>
+						
+							<option value="6037" data-ace-mode="eiffel">Eiffel (Liberty Eiffel 07829e3)</option>
+						
+							<option value="6038" data-ace-mode="elixir">Elixir (Elixir 1.18.4 (OTP 28.0.2))</option>
+						
+							<option value="6039" data-ace-mode="lisp">Emacs Lisp(Native Compile)(GNU Emacs 29.4)</option>
+						
+							<option value="6040" data-ace-mode="text">Emojicode 1.0 beta 2 (emojicodec 1.0 beta 2)</option>
+						
+							<option value="6041" data-ace-mode="erlang">Erlang (Erlang 28.0.2)</option>
+						
+							<option value="6042" data-ace-mode="fsharp">F# 9.0 (.NET 9.0.8)</option>
+						
+							<option value="6043" data-ace-mode="text">Factor (Factor 0.100)</option>
+						
+							<option value="6044" data-ace-mode="sh">Fish (fish 4.0.2)</option>
+						
+							<option value="6045" data-ace-mode="forth">Forth (gforth 0.7.3)</option>
+						
+							<option value="6046" data-ace-mode="fortran">Fortran2018 (Flang 20.1.7)</option>
+						
+							<option value="6047" data-ace-mode="fortran">Fortran2023 (GCC 14.2.0)</option>
+						
+							<option value="6048" data-ace-mode="fortran">FORTRAN77 (GCC 14.2.0)</option>
+						
+							<option value="6049" data-ace-mode="text">Gleam (Gleam 1.12.0 (OTP 28.0.2))</option>
+						
+							<option value="6050" data-ace-mode="golang">Go 1.18 (gccgo 15.2.0)</option>
+						
+							<option value="6051" data-ace-mode="golang">Go (go 1.25.1)</option>
+						
+							<option value="6052" data-ace-mode="haskell">Haskell (GHC 9.8.4)</option>
+						
+							<option value="6053" data-ace-mode="haxe">Haxe/JVM 4.3.7 (hxjava 4.2.0)</option>
+						
+							<option value="6054" data-ace-mode="c_cpp">C&#43;&#43; IOI-Style(GNU&#43;&#43;20) (GCC 14.2.0)</option>
+						
+							<option value="6055" data-ace-mode="lisp">ISLisp (Easy-ISLisp 5.43)</option>
+						
+							<option value="6056" data-ace-mode="java">Java24 (OpenJDK 24.0.2)</option>
+						
+							<option value="6057" data-ace-mode="javascript">JavaScript (Bun 1.2.21)</option>
+						
+							<option value="6058" data-ace-mode="javascript">JavaScript (Deno 2.4.5)</option>
+						
+							<option value="6059" data-ace-mode="javascript">JavaScript (Node.js 22.19.0)</option>
+						
+							<option value="6060" data-ace-mode="text">Jule (jule 0.1.6)</option>
+						
+							<option value="6061" data-ace-mode="text">Koka (koka v3.2.2)</option>
+						
+							<option value="6062" data-ace-mode="kotlin">Kotlin (Kotlin/JVM 2.2.10)</option>
+						
+							<option value="6063" data-ace-mode="text">Kuin (kuincl v.2021.8.17)</option>
+						
+							<option value="6064" data-ace-mode="text">Lazy K (irori v1.0.0)</option>
+						
+							<option value="6065" data-ace-mode="text">Lean (lean v4.22.0)</option>
+						
+							<option value="6066" data-ace-mode="text">LLVM IR (Clang 21.1.0)</option>
+						
+							<option value="6067" data-ace-mode="lua">Lua (Lua 5.4.7)</option>
+						
+							<option value="6068" data-ace-mode="lua">Lua (LuaJIT 2.1.1703358377)</option>
+						
+							<option value="6069" data-ace-mode="text">Mercury (Mercury 22.01.8)</option>
+						
+							<option value="6071" data-ace-mode="nim">Nim (Nim 1.6.20)</option>
+						
+							<option value="6072" data-ace-mode="nim">Nim (Nim 2.2.4)</option>
+						
+							<option value="6073" data-ace-mode="ocaml">OCaml (ocamlopt 5.3.0)</option>
+						
+							<option value="6074" data-ace-mode="text">Octave (GNU Octave 10.2.0)</option>
+						
+							<option value="6075" data-ace-mode="pascal">Pascal (fpc 3.2.2)</option>
+						
+							<option value="6076" data-ace-mode="perl">Perl (perl 5.38.2)</option>
+						
+							<option value="6077" data-ace-mode="php">PHP (PHP 8.4.12)</option>
+						
+							<option value="6078" data-ace-mode="text">Piet (your-diary/piet_programming_language 3.0.0) (PPM image)</option>
+						
+							<option value="6079" data-ace-mode="text">Pony (ponyc 0.59.0)</option>
+						
+							<option value="6080" data-ace-mode="powershell">PowerShell (PowerShell 7.5.2)</option>
+						
+							<option value="6081" data-ace-mode="prolog">Prolog (SWI-Prolog 9.2.9)</option>
+						
+							<option value="6082" data-ace-mode="python">Python (CPython 3.13.7)</option>
+						
+							<option value="6083" data-ace-mode="python">Python (PyPy 3.11-v7.3.20)</option>
+						
+							<option value="6084" data-ace-mode="r">R (GNU R 4.5.0)</option>
+						
+							<option value="6085" data-ace-mode="text">ReasonML (reson 3.16.0)</option>
+						
+							<option value="6086" data-ace-mode="ruby">Ruby 3.3 (truffleruby 25.0.0)</option>
+						
+							<option value="6087" data-ace-mode="ruby">Ruby 3.4 (ruby 3.4.5)</option>
+						
+							<option value="6088" data-ace-mode="rust">Rust (rustc 1.89.0)</option>
+						
+							<option value="6089" data-ace-mode="python">SageMath (SageMath 10.7)</option>
+						
+							<option value="6090" data-ace-mode="scala">Scala (Dotty 3.7.2)</option>
+						
+							<option value="6091" data-ace-mode="scala">Scala 3.7.2 (Scala Native 0.5.8)</option>
+						
+							<option value="6092" data-ace-mode="scheme">Scheme (ChezScheme 10.2.0)</option>
+						
+							<option value="6093" data-ace-mode="scheme">Scheme (Gauche 0.9.15)</option>
+						
+							<option value="6094" data-ace-mode="text">Seed7 (Seed7 3.5.0)</option>
+						
+							<option value="6095" data-ace-mode="swift">Swift 6.2</option>
+						
+							<option value="6096" data-ace-mode="tcl">Tcl (tclsh 9.0.1)</option>
+						
+							<option value="6097" data-ace-mode="text">Terra (Terra 1.2.0)</option>
+						
+							<option value="6098" data-ace-mode="tex">TeX (tex 3.141592653)</option>
+						
+							<option value="6099" data-ace-mode="text">Text (cat 9.4)</option>
+						
+							<option value="6100" data-ace-mode="typescript">TypeScript 5.8 (Deno 2.4.5)</option>
+						
+							<option value="6101" data-ace-mode="typescript">TypeScript 5.9 (tsc 5.9.2 (Bun 1.2.21))</option>
+						
+							<option value="6102" data-ace-mode="typescript">TypeScript 5.9 (tsc 5.9.2 (Node.js 22.19.0))</option>
+						
+							<option value="6103" data-ace-mode="text">Uiua (uiua 0.16.2)</option>
+						
+							<option value="6104" data-ace-mode="text">Unison (Unison 0.5.47)</option>
+						
+							<option value="6105" data-ace-mode="text">V (0.4.10)</option>
+						
+							<option value="6106" data-ace-mode="vala">Vala (valac 0.56.18)</option>
+						
+							<option value="6107" data-ace-mode="verilog">Verilog 2012 (Icarus Verilog 12.0)</option>
+						
+							<option value="6108" data-ace-mode="text">Veryl (veryl 0.16.4)</option>
+						
+							<option value="6109" data-ace-mode="text">WebAssembly (wabt 1.0.34 &#43; iwasm 2.4.1)</option>
+						
+							<option value="6110" data-ace-mode="text">Whitespace (whitespacers 1.3.0)</option>
+						
+							<option value="6111" data-ace-mode="zig">Zig (Zig 0.15.1)</option>
+						
+							<option value="6112" data-ace-mode="text">なでしこ (cnako3 3.7.8 (Node.js 22.19.0))</option>
+						
+							<option value="6113" data-ace-mode="text">プロデル (mono版プロデル 2.0.1353)</option>
+						
+							<option value="6114" data-ace-mode="julia">Julia (Julia 1.11.6)</option>
+						
+							<option value="6115" data-ace-mode="python">Python (Codon 0.19.3)</option>
+						
+							<option value="6116" data-ace-mode="c_cpp">C&#43;&#43;23 (Clang 21.1.0)</option>
+						
+							<option value="6117" data-ace-mode="text">Fix (1.1.0-alpha.12)</option>
+						
+							<option value="6118" data-ace-mode="sql">SQL (DuckDB 1.3.2)</option>
+						
+					</select>
+					<span class="error"></span>
+				</div>
+			</div>
+			<script>var currentLang = getLS('defaultLang');</script>
+			
+			
+<div class="form-group">
+	<div class="col-sm-3 col-md-2 editor-label">
+		<label class="control-label" for="sourceCode">ソースコード</label>
+		<div class="editor-buttons">
+			<button id="btn-open-file" type="button" class="btn btn-default btn-sm">
+				<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> &nbsp; ファイルを開く
+			</button>
+			<button id="btn-customize" type="button" class="btn btn-default btn-sm">
+				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> &nbsp; カスタマイズ
+			</button>
+			<button type="button" class="btn btn-default btn-sm btn-toggle-editor" data-toggle="button" autocomplete="off">
+				エディタ切り替え
+			</button>
+			<button type="button" class="btn btn-default btn-sm btn-auto-height" data-toggle="button" autocomplete="off">
+				高さ自動調節
+			</button>
+		</div>
+	</div>
+	<div class="col-sm-9 col-md-10" id="sourceCode">
+		<div id="editor"></div>
+		<textarea id="plain-textarea" class="form-control" style="display:none;" name="sourceCode"></textarea>
+		<p>
+			<span class="gray">※ 512 KiB まで</span><br>
+		</p>
+	</div>
+	<input id="input-open-file" type="file" style="display:none;">
+</div>
+
+
+			<input type="hidden" name="csrf_token" value="Rp47s2LKjFGJ&#43;e1kEuKktYKsZeIU7010&#43;7BlZ&#43;2VlCs=" />
+			<div class="form-group">
+				<label class="control-label col-sm-3 col-md-2"></label>
+				<div class="col-sm-5">
+					
+					<button type="submit" class="btn btn-primary" id="submit">提出</button>
+				</div>
+			</div>
+		</form>
+		
+	</div>
+</div>
+
+
+
+
+		
+			<hr>
+			
+			
+			
+<div class="a2a_kit a2a_kit_size_20 a2a_default_style pull-right" data-a2a-url="https://atcoder.jp/contests/masters2026-qual/tasks/masters2026_qual_a?lang=ja" data-a2a-title="A - Periodic Patrol Automata (A)">
+	<a class="a2a_button_facebook"></a>
+	<a class="a2a_button_twitter"></a>
+	
+		<a class="a2a_button_hatena"></a>
+	
+	<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+</div>
+
+		
+		<script async src="//static.addtoany.com/menu/page.js"></script>
+		
+	</div> 
+	<hr>
+</div> 
+
+	<div class="container" style="margin-bottom: 80px;">
+			<footer class="footer">
+			
+				<ul>
+					<li><a href="/contests/masters2026-qual/rules">ルール</a></li>
+					<li><a href="/contests/masters2026-qual/glossary">用語集</a></li>
+					
+				</ul>
+			
+			<ul>
+				<li><a href="/tos">利用規約</a></li>
+				<li><a href="/privacy">プライバシーポリシー</a></li>
+				<li><a href="/personal">個人情報保護方針</a></li>
+				<li><a href="/company">企業情報</a></li>
+				<li><a href="/faq">よくある質問</a></li>
+				<li><a href="/contact">お問い合わせ</a></li>
+				<li><a href="/documents/request">資料請求</a></li>
+			</ul>
+			<div class="text-center">
+					<small id="copyright">Copyright Since 2012 &copy;<a href="http://atcoder.co.jp">AtCoder Inc.</a> All rights reserved.</small>
+			</div>
+			</footer>
+	</div>
+	<p id="fixed-server-timer" class="contest-timer"></p>
+	<div id="scroll-page-top" style="display:none;"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> ページトップ</div>
+
+</body>
+</html>
+
+
