@@ -1,0 +1,54 @@
+[
+  {
+    "index": 0,
+    "seed": 20260418,
+    "input_seed_file": "0100.txt",
+    "shift": [
+      7,
+      2
+    ],
+    "hash": "0x55dfa8e06eb21d84",
+    "ops": 13,
+    "case_file": "b_cases/case_00.txt",
+    "ops_file": "b_cases/case_00_true_ops.txt"
+  },
+  {
+    "index": 1,
+    "seed": 20270425,
+    "input_seed_file": "0101.txt",
+    "shift": [
+      5,
+      4
+    ],
+    "hash": "0x7c12fe6b55410999",
+    "ops": 13,
+    "case_file": "b_cases/case_01.txt",
+    "ops_file": "b_cases/case_01_true_ops.txt"
+  },
+  {
+    "index": 2,
+    "seed": 20280432,
+    "input_seed_file": "0102.txt",
+    "shift": [
+      3,
+      4
+    ],
+    "hash": "0xe8c9117949ea75a3",
+    "ops": 13,
+    "case_file": "b_cases/case_02.txt",
+    "ops_file": "b_cases/case_02_true_ops.txt"
+  },
+  {
+    "index": 3,
+    "seed": 20290439,
+    "input_seed_file": "0103.txt",
+    "shift": [
+      8,
+      6
+    ],
+    "hash": "0x0864b87fedf9f1d8",
+    "ops": 13,
+    "case_file": "b_cases/case_03.txt",
+    "ops_file": "b_cases/case_03_true_ops.txt"
+  }
+]
