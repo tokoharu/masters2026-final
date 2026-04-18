@@ -234,6 +234,10 @@ def write_html(
     .layer-card {{ border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 6px; }}
     .layer-title {{ color: var(--muted); font-size: 13px; margin: 0 0 4px 0; }}
     .layer-canvas {{ width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: #fff; display: block; }}
+    .layer-card.hl-paint {{ border-color: #16a34a; box-shadow: inset 0 0 0 2px rgba(22,163,74,0.16); }}
+    .layer-card.hl-clear {{ border-color: #dc2626; box-shadow: inset 0 0 0 2px rgba(220,38,38,0.14); }}
+    .layer-card.hl-copy-src {{ border-color: #f59e0b; box-shadow: inset 0 0 0 2px rgba(245,158,11,0.18); }}
+    .layer-card.hl-copy-dst {{ border-color: #2563eb; box-shadow: inset 0 0 0 2px rgba(37,99,235,0.16); }}
     .legend {{ margin-top: 10px; color: var(--muted); font-size: 13px; }}
     .action {{ margin-top: 6px; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }}
   </style>
@@ -273,7 +277,7 @@ def write_html(
       </div>
 
       <div id=\"action\" class=\"action\"></div>
-      <div class=\"legend\">Use the slider to inspect each action. Target and all layers are displayed with the same card size.</div>
+      <div class=\"legend\">Paint: green, Clear: red, Copy source: amber, Copy destination: blue. Copy overlays show source/destination ranges.</div>
     </div>
   </div>
 
@@ -297,6 +301,7 @@ tgtCanvas.width = side;
 tgtCanvas.height = side;
 
 const layerCanvases = [];
+const layerCards = [];
 for (let i = 0; i < DATA.k; i++) {{
   const card = document.createElement('div');
   card.className = 'layer-card';
@@ -314,13 +319,14 @@ for (let i = 0; i < DATA.k; i++) {{
   card.appendChild(canvas);
   layersRoot.appendChild(card);
   layerCanvases.push(canvas);
+  layerCards.push(card);
 }}
 
 function colorOf(v) {{
   return DATA.palette[Math.min(v, DATA.palette.length - 1)];
 }}
 
-function drawGrid(ctx, grid) {{
+function drawGrid(ctx, grid, overlay = null) {{
   ctx.clearRect(0, 0, side, side);
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, side, side);
@@ -348,24 +354,122 @@ function drawGrid(ctx, grid) {{
   ctx.strokeStyle = '#111827';
   ctx.lineWidth = 2;
   ctx.strokeRect(pad, pad, DATA.n * cell, DATA.n * cell);
+
+  if (!overlay) return;
+
+  if (overlay.rects) {{
+    for (const r of overlay.rects) {{
+      const x = pad + r.j0 * cell;
+      const y = pad + r.i0 * cell;
+      const w = (r.j1 - r.j0 + 1) * cell;
+      const h = (r.i1 - r.i0 + 1) * cell;
+      ctx.save();
+      ctx.strokeStyle = r.color;
+      ctx.lineWidth = 3;
+      if (r.dashed) ctx.setLineDash([8, 4]);
+      ctx.strokeRect(x + 1, y + 1, Math.max(0, w - 2), Math.max(0, h - 2));
+      ctx.restore();
+    }}
+  }}
+
+  if (overlay.cell) {{
+    const i = overlay.cell.i;
+    const j = overlay.cell.j;
+    const x = pad + j * cell;
+    const y = pad + i * cell;
+    ctx.save();
+    ctx.strokeStyle = overlay.cell.color;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x + 2, y + 2, Math.max(0, cell - 4), Math.max(0, cell - 4));
+    ctx.restore();
+  }}
+}}
+
+function bboxNonZero(grid) {{
+  let minI = DATA.n, maxI = -1, minJ = DATA.n, maxJ = -1;
+  for (let i = 0; i < DATA.n; i++) {{
+    for (let j = 0; j < DATA.n; j++) {{
+      if (grid[i][j] !== 0) {{
+        if (i < minI) minI = i;
+        if (i > maxI) maxI = i;
+        if (j < minJ) minJ = j;
+        if (j > maxJ) maxJ = j;
+      }}
+    }}
+  }}
+  if (maxI < 0) return null;
+  return {{ i0: minI, i1: maxI, j0: minJ, j1: maxJ }};
+}}
+
+function rotateGrid(grid, r) {{
+  let out = grid.map(row => row.slice());
+  for (let t = 0; t < r; t++) {{
+    const nxt = Array.from({{ length: DATA.n }}, () => Array(DATA.n).fill(0));
+    for (let i = 0; i < DATA.n; i++) {{
+      for (let j = 0; j < DATA.n; j++) {{
+        nxt[i][j] = out[DATA.n - 1 - j][i];
+      }}
+    }}
+    out = nxt;
+  }}
+  return out;
 }}
 
 function actionText(a) {{
-  if (!a) return 'initial state';
-  if (a.kind === 0) return `action: Paint  k=${{a.k}} i=${{a.i}} j=${{a.j}} c=${{a.c}}`;
-  if (a.kind === 1) return `action: Copy   k=${{a.k}} h=${{a.h}} r=${{a.r}} di=${{a.di}} dj=${{a.dj}}`;
-  return `action: Clear  k=${{a.k}}`;
+  if (!a) return '初期状態';
+  if (a.kind === 1) return `【コピー】 レイヤ ${{a.h}} → レイヤ ${{a.k}}、回転 ${{a.r}}、平行移動 (${{a.di >= 0 ? '+' : ''}}${{a.di}}, ${{a.dj >= 0 ? '+' : ''}}${{a.dj}})`;
+  if (a.kind === 2) return `【クリア】レイヤ ${{a.k}}`;
+  return `【ペイント】対象レイヤ ${{a.k}}、座標 (${{a.i}}, ${{a.j}})、色 ${{a.c}}`;
 }}
 
 function render() {{
+  for (const card of layerCards) {{
+    card.classList.remove('hl-paint', 'hl-clear', 'hl-copy-src', 'hl-copy-dst');
+  }}
+
+  const overlays = Array.from({{ length: DATA.k }}, () => null);
+  const a = step === 0 ? null : DATA.actions[step - 1];
+  if (a) {{
+    if (a.kind === 0) {{
+      layerCards[a.k].classList.add('hl-paint');
+      overlays[a.k] = {{ cell: {{ i: a.i, j: a.j, color: '#16a34a' }} }};
+    }} else if (a.kind === 2) {{
+      layerCards[a.k].classList.add('hl-clear');
+    }} else if (a.kind === 1) {{
+      layerCards[a.h].classList.add('hl-copy-src');
+      layerCards[a.k].classList.add('hl-copy-dst');
+
+      const srcPrev = DATA.frames[step - 1][a.h];
+      const srcBox = bboxNonZero(srcPrev);
+      if (srcBox) {{
+        overlays[a.h] = {{ rects: [{{ ...srcBox, color: '#f59e0b', dashed: false }}] }};
+      }}
+
+      const rot = rotateGrid(srcPrev, a.r);
+      const rotBox = bboxNonZero(rot);
+      if (rotBox) {{
+        overlays[a.k] = {{
+          rects: [{{
+            i0: rotBox.i0 + a.di,
+            i1: rotBox.i1 + a.di,
+            j0: rotBox.j0 + a.dj,
+            j1: rotBox.j1 + a.dj,
+            color: '#2563eb',
+            dashed: true,
+          }}],
+        }};
+      }}
+    }}
+  }}
+
   for (let i = 0; i < DATA.k; i++) {{
     const ctx = layerCanvases[i].getContext('2d');
-    drawGrid(ctx, DATA.frames[step][i]);
+    drawGrid(ctx, DATA.frames[step][i], overlays[i]);
   }}
   drawGrid(tgtCtx, DATA.g);
   stepLabel.textContent = `${{step}} / ${{DATA.frames.length - 1}}`;
   slider.value = String(step);
-  actionLabel.textContent = actionText(step === 0 ? null : DATA.actions[step - 1]);
+  actionLabel.textContent = actionText(a);
 }}
 
 function setStep(v) {{
